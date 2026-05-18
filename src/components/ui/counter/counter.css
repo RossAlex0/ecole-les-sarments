@@ -1,0 +1,12 @@
+.counter {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.counter_num {
+  font-size: 68px;
+  color: var(--blue-color);
+  font-family: var(--outfit-font);
+}
