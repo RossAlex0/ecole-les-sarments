@@ -1,8 +1,8 @@
 import Image from "next/image";
 import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
 import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
-import "./header.css";
 import { headerNavigation } from "@/utils/navigation/navigation";
+import "./header.css";
 
 export default function Header() {
   return (
