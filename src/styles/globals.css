@@ -2,7 +2,7 @@
   --blue-color: #0b2947;
   --white-color: #ffffff;
   --gold-color: #c6902f;
-  --playfair-font: var(--font-playfair), serif;
+  --outfit-font: var(--font-outfit), sans-serif;
 }
 
 html {
@@ -20,9 +20,13 @@ body {
   display: flex;
   flex-direction: column;
   background: var(--blue-color);
-  font-family: var(--playfair-font);
+  font-family: var(--outfit-font);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  position: relative;
 }
 
 * {

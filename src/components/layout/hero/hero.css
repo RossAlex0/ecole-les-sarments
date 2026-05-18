@@ -1,0 +1,16 @@
+.hero {
+  height: 95vh;
+  width: 100%;
+  background-image: url(../../../../public/image/hero-little-girl.webp);
+  background-size: 100%;
+  margin-top: 5vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem;
+}
+
+.hero_text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
