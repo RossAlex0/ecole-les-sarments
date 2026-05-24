@@ -1,0 +1,24 @@
+import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
+import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
+
+import "./cardInfo.css";
+
+export type CardInfoProps = React.ButtonHTMLAttributes<HTMLDivElement> & {
+  title: string;
+  text: string;
+  hideBtn?: boolean;
+};
+
+export default function CardInfo({ title, text, hideBtn, ...props }: CardInfoProps) {
+  return (
+    <div {...props} className={`card_support ${props.className}`}>
+      <SarmentsText format="title">{title}</SarmentsText>
+      <SarmentsText format="text">{text}</SarmentsText>
+      {hideBtn ? undefined : (
+        <SarmentsButton href="/" hasBorder className="card_support_btn">
+          Nous soutenir
+        </SarmentsButton>
+      )}
+    </div>
+  );
+}

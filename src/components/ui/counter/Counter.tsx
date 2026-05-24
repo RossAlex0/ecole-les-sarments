@@ -56,7 +56,7 @@ export default function Counter({ end, children, duration = 2000 }: CounterProps
       <span ref={ref} className="counter_num">
         {count}
       </span>
-      <SarmentsText format="text" isDark>
+      <SarmentsText format="text" color="blue">
         {children}
       </SarmentsText>
     </div>

@@ -5,7 +5,7 @@ import "./stat.css";
 export default function Stat() {
   return (
     <section className="stat">
-      <SarmentsText format="title" isDark>
+      <SarmentsText format="title" color="blue">
         Quelques chiffres
       </SarmentsText>
       <div className="stat_item">
