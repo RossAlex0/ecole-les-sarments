@@ -1,10 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
 import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 import { headerNavigation } from "@/utils/navigation/navigation";
+import { usePathname } from "next/navigation";
+
 import "./header.css";
 
 export default function Header() {
+  const pathname = usePathname();
+
   return (
     <header className="header">
       <Image
@@ -22,7 +28,10 @@ export default function Header() {
                 <SarmentsButton href={item.link}>{item.label}</SarmentsButton>
               ) : (
                 <a href={item.link}>
-                  <SarmentsText format="view" className="header_nav_link">
+                  <SarmentsText
+                    format="view"
+                    className={`header_nav_link ${pathname === item.link ? "active" : ""}`}
+                  >
                     {item.label}
                   </SarmentsText>
                 </a>
