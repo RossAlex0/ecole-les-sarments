@@ -1,18 +1,8 @@
-import Quote from "@/components/ui/quote/Quote";
-import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
-import "./video-section.css";
+import "./videoSection.css";
 
 export default function VideoSection() {
   return (
     <section className="video_section">
-      <div className="video_section_text">
-        <Quote className="first_quote" />
-        <div className="video_section_title">
-          <SarmentsText format="fat-title">Connaitre pour aimer, aimer pour connaitre</SarmentsText>
-          <SarmentsText format="text">Notre formidable devise</SarmentsText>
-        </div>
-        <Quote className="last_quote" />
-      </div>
       <div className="video_section_frame">
         <iframe
           width="100%"

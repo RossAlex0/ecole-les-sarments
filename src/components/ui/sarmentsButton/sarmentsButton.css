@@ -1,6 +1,5 @@
 .button_custom {
   display: inline-block;
-  background-color: var(--gold-color);
   padding: 0.4rem 1.25rem;
   border-radius: 9999px;
   border: none;
@@ -10,7 +9,18 @@
     transform 0.2s ease;
 }
 
+.dark_btn {
+  background-color: var(--blue-color);
+}
+.light_btn {
+  background-color: var(--gold-color);
+}
+
+.border {
+  border: 1px solid var(--white-color);
+}
+
 .button_custom:hover {
-  background-color: #c19838;
+  background-color: var(--hover-gold-button);
   transform: translateY(-1.5px);
 }
