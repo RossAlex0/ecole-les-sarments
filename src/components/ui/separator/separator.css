@@ -1,0 +1,14 @@
+.sp_white {
+  background-color: var(--white-color);
+}
+.sp_gold {
+  background-color: var(--gold-color);
+}
+.sp_blue {
+  background-color: var(--blue-color);
+}
+
+.separator {
+  border: none;
+  width: 1px;
+}
