@@ -1,0 +1,12 @@
+.video_section {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.video_section_frame {
+  height: 100%;
+  width: 100%;
+}
