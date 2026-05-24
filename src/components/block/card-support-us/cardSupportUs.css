@@ -1,0 +1,15 @@
+.card_support {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: 40%;
+  max-width: 75%;
+  padding: 2rem 3rem;
+  background-color: var(--gold-color);
+  border-radius: 12px;
+}
+
+.card_support_btn {
+  margin-top: 1.3rem;
+}
