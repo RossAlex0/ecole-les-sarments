@@ -1,0 +1,26 @@
+.citation_banner {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  min-height: 10vh;
+  padding: 2rem;
+}
+
+.first_quote {
+  margin-top: -0.5rem;
+}
+.last_quote {
+  margin-top: -1rem;
+  rotate: calc(180deg);
+}
+
+.citation_banner_title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 60%;
+}
+.citation_banner_title_desc {
+  margin-top: 0.5rem;
+  text-align: center;
+}
