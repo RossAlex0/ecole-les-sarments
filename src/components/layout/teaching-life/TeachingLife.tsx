@@ -2,9 +2,10 @@
 import Toggle from "@/components/ui/toggle/Toggle";
 import { useState } from "react";
 
-import "./teachingLife.css";
 import School from "./school/School";
 import PreSchool from "./pre-school/PreSchool";
+import "./teachingLife.css";
+import CardInfo from "@/components/block/card-info/CardInfo";
 
 export default function TeachingLife() {
   const [active, setActive] = useState(0);
@@ -16,6 +17,12 @@ export default function TeachingLife() {
         onChange={(i) => setActive(i)}
       />
       {active === 1 ? <School /> : <PreSchool />}
+      <CardInfo
+        title="Offrez à un enfant la possibilité de grandir et d’apprendre"
+        text="Participer à un projet ou parrainer un enfant"
+        label="Parrainer un enfant"
+        className="teaching_card"
+      />
     </div>
   );
 }

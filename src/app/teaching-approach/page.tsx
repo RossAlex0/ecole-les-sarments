@@ -1,9 +1,8 @@
 import CardInfo from "@/components/block/card-info/CardInfo";
+import Advantage from "@/components/layout/advantage/Advantage";
+import TeachingLife from "@/components/layout/teaching-life/TeachingLife";
 
 import "./teachingApproach.css";
-import Advantage from "@/components/layout/advantage/Advantage";
-import Toggle from "@/components/ui/toggle/Toggle";
-import TeachingLife from "@/components/layout/teaching-life/TeachingLife";
 
 export default function TeachingApproachePage() {
   return (

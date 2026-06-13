@@ -2,11 +2,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 65%;
-  padding: 2rem 0;
+  width: 100%;
+  padding: 2rem 0rem;
   gap: 1rem;
 }
 
 .school_base > p {
   text-align: center;
+  padding-inline: 12rem;
+}
+
+.school_base_image {
+  position: relative;
+  height: 85vh;
+  width: 100%;
+  margin-block: 4rem;
+}
+.school_base_image > img {
+  object-fit: cover;
 }

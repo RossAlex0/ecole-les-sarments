@@ -1,13 +1,24 @@
+"use client";
 import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 import Image from "next/image";
 import "./schoolBase.css";
+import Timeline, { TimelineProps } from "@/components/ui/timeline/Timeline";
+
 type SchoolBaseProps = {
   title: string;
   urlImage: string;
   horaire: string;
+  morning: TimelineProps;
+  afternoon: TimelineProps;
 };
 
-export default function SchoolBase({ title, urlImage, horaire }: SchoolBaseProps) {
+export default function SchoolBase({
+  title,
+  urlImage,
+  horaire,
+  morning,
+  afternoon,
+}: SchoolBaseProps) {
   return (
     <div className="school_base">
       <SarmentsText format="title">{title}</SarmentsText>
@@ -18,11 +29,11 @@ export default function SchoolBase({ title, urlImage, horaire }: SchoolBaseProps
         mathématiques, et s’enrichissent par la musique, les arts, la motricité et les sciences,
         dans un cadre bienveillant qui encourage le goût d’apprendre.
       </SarmentsText>
-      <div>
+      <div className="school_base_image">
         <Image src={urlImage} fill loading="lazy" alt="classroom/" />
       </div>
       <SarmentsText format="title">La journée type</SarmentsText>
-      {/* component timeline */}
+      <Timeline title={morning.title} steps={morning.steps} />
       <div>
         <SarmentsText format="semi-title-medium">Midi</SarmentsText>
         <SarmentsText format="semi-title-medium" color="gold">
@@ -32,7 +43,7 @@ export default function SchoolBase({ title, urlImage, horaire }: SchoolBaseProps
           Temps du repas (panier repas fourni par les familles) et récréation
         </SarmentsText>
       </div>
-      {/* component timeline */}
+      <Timeline title={afternoon.title} steps={afternoon.steps} />
     </div>
   );
 }
