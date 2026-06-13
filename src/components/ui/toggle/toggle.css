@@ -1,0 +1,38 @@
+.custom_toggle {
+  position: relative;
+  display: inline-flex;
+  border: 1px solid var(--white-color);
+  border-radius: 999px;
+  padding: 4px;
+  background-color: transparent;
+}
+
+.custom_toggle_slider {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  background-color: var(--white-color);
+  border-radius: 999px;
+  transition: transform 0.3s ease;
+  z-index: 0;
+}
+
+.custom_toggle_option {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  background: transparent;
+  color: var(--white-color);
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.custom_toggle_option_active {
+  color: var(--blue-color);
+}

@@ -3,7 +3,7 @@ import "./sarmentsText.css";
 
 export type CustomTextProps = {
   format: "fat-title" | "title" | "semi-title" | "semi-title-medium" | "text" | "view";
-  isDark?: boolean;
+  color?: "white" | "blue" | "gold";
 } & React.HTMLAttributes<HTMLElement>;
 
 const formatToTag = {
@@ -15,9 +15,15 @@ const formatToTag = {
   view: "p",
 } as const;
 
-export default function SarmentsText({ format, isDark, className, ...props }: CustomTextProps) {
+export default function SarmentsText({
+  format,
+  color = "white",
+  className,
+  ...props
+}: CustomTextProps) {
   const Tag = formatToTag[format];
-  const theme = isDark ? "dark" : "light";
 
-  return <Tag {...props} className={`custom_text_${format} ${theme} ${className ?? ""}`.trim()} />;
+  return (
+    <Tag {...props} className={`custom_text_${format} text_${color} ${className ?? ""}`.trim()} />
+  );
 }

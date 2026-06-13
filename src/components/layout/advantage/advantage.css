@@ -1,0 +1,38 @@
+.advantage {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.advantage_content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.advantage_content_card {
+  width: 48.5%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  border: 1px solid var(--white-color);
+  padding: 1rem;
+  border-radius: 12px;
+  transition: transform 0.4s ease;
+}
+
+.advantage_content_card_bold {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.advantage_content_card:hover {
+  transform: scale(1.04);
+}

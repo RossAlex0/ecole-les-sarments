@@ -1,4 +1,4 @@
-import CardSupportUs from "@/components/block/card-support-us/CardSupportUs";
+import CardInfo from "@/components/block/card-info/CardInfo";
 
 import "./homeFooter.css";
 
@@ -9,10 +9,7 @@ export default function HomeFooter() {
     <section className="home_footer">
       <div>{hasEvent ? <div></div> : undefined}</div>
       <div className="home_footer_card">
-        <CardSupportUs
-          title="Soutenir l'école"
-          text="Participer à un projet ou parrainer un enfant"
-        />
+        <CardInfo title="Soutenir l'école" text="Participer à un projet ou parrainer un enfant" />
       </div>
     </section>
   );
