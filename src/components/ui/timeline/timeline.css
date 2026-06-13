@@ -1,0 +1,141 @@
+.timeline {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  color: var(--white-color);
+}
+
+.timeline_title {
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+}
+
+.timeline_track {
+  position: relative;
+}
+
+.timeline_line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background-color: var(--gold-color);
+}
+
+.timeline_steps {
+  list-style: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.timeline_step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+.timeline_dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--blue-color);
+  border: 2px solid var(--gold-color);
+  z-index: 1;
+}
+
+.timeline_content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.timeline_step_left .timeline_content {
+  grid-column: 1;
+  text-align: right;
+  align-items: flex-end;
+  padding-right: 2rem;
+}
+
+.timeline_step_right .timeline_content {
+  grid-column: 2;
+  text-align: left;
+  align-items: flex-start;
+  padding-left: 2rem;
+}
+
+.timeline_step_center {
+  grid-template-columns: 1fr;
+}
+
+.timeline_step_center .timeline_content {
+  text-align: center;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.timeline_time {
+  color: var(--gold-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.timeline_description {
+  color: var(--white-color);
+  font-size: 0.95rem;
+  opacity: 0.95;
+}
+
+.timeline_badges {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.timeline_badge {
+  background-color: var(--gold-color);
+  color: var(--blue-color);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .timeline_line {
+    left: 1rem;
+    transform: none;
+  }
+
+  .timeline_step,
+  .timeline_step_center {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline_dot {
+    left: 1rem;
+    transform: translate(-50%, -50%);
+  }
+
+  .timeline_step_left .timeline_content,
+  .timeline_step_right .timeline_content,
+  .timeline_step_center .timeline_content {
+    grid-column: 1;
+    text-align: left;
+    align-items: flex-start;
+    padding-left: 2.5rem;
+    padding-right: 0;
+  }
+}
