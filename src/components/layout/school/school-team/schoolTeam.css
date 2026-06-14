@@ -1,0 +1,119 @@
+.school_team {
+  background-color: var(--white-color);
+  width: 100%;
+  margin: 0 auto;
+  padding: 4rem 6rem;
+}
+
+.school_team_header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.school_team_subtitle {
+  margin-top: 0.5rem;
+}
+
+.school_team_list {
+  display: flex;
+  padding-inline: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 11%;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.school_team_card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.school_team_avatar {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.school_team_info {
+  display: flex;
+  flex-direction: column;
+}
+
+.school_team_stats {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.school_team_stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.school_team_stat_icon {
+  font-size: 3.5rem;
+  color: var(--blue-color);
+}
+
+.school_team_stat_number {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--blue-color);
+}
+
+.school_team_stat_label {
+  font-size: 0.9rem;
+  color: var(--blue-color);
+  max-width: 180px;
+}
+
+@media (max-width: 1024px) {
+  .school_team {
+    padding: 3rem 1.5rem;
+  }
+
+  .school_team_avatar {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .school_team_list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .school_team_card:nth-child(4),
+  .school_team_card:nth-child(5) {
+    grid-column: auto;
+    justify-self: start;
+    margin-right: 0;
+  }
+
+  .school_team_stats {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .school_team_list {
+    grid-template-columns: 1fr;
+  }
+
+  .school_team_card {
+    justify-content: flex-start;
+  }
+}

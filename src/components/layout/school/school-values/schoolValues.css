@@ -1,0 +1,104 @@
+.school_values {
+  width: 100%;
+  z-index: 1;
+  padding-bottom: 10vh;
+  position: relative;
+}
+
+.school_values_container {
+  background-color: var(--white-color);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  width: calc(100% - 6rem);
+  margin-inline: auto;
+  margin-top: -2rem;
+  z-index: 2;
+}
+
+.school_values_title {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.school_values_list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.school_values_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.school_values_icon {
+  font-size: 3rem;
+  color: var(--blue-color);
+}
+
+.school_values_desc {
+  max-width: 220px;
+}
+
+.school_values_yellow {
+  position: absolute;
+  z-index: -1;
+  height: 40vh;
+  max-height: 350px;
+  width: 100%;
+  content: " ";
+  background-color: var(--gold-color);
+  bottom: 0;
+}
+
+@media (max-width: 1024px) {
+  .school_values {
+    padding: 2.5rem 1.5rem;
+    margin: 0 1rem;
+  }
+
+  .school_values_list {
+    gap: 1.5rem;
+  }
+
+  .school_values_icon {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .school_values {
+    padding: 2rem 0rem;
+  }
+
+  .school_values_container {
+    padding-inline: 1rem;
+  }
+
+  .school_values_list {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .school_values_desc {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .school_values {
+    border-radius: 8px;
+  }
+
+  .school_values_title {
+    margin-bottom: 1.5rem;
+  }
+
+  .school_values_icon {
+    font-size: 2.25rem;
+  }
+}
