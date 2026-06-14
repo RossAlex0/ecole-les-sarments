@@ -1,0 +1,190 @@
+.school {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 14vh;
+}
+
+.school_director {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3rem;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 4rem 4rem;
+}
+
+.school_director_image {
+  position: relative;
+  width: 380px;
+  height: 380px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.school_director_image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.school_director_content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.school_director_text {
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+.school_footer {
+  width: 100%;
+  padding-inline: 4rem;
+}
+
+.school_footer_info {
+  width: 100%;
+  padding: 1.5rem;
+  border: 1px solid var(--white-color);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.school_footer_info > div {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.school_footer_info_text {
+  color: var(--gold-color);
+  text-decoration: underline;
+}
+
+.school_footer_info_title {
+  margin-bottom: 1rem;
+}
+
+.parents_hero {
+  position: relative;
+  width: 100%;
+  min-height: 480px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 2rem 3rem;
+}
+
+.parents_hero_image {
+  position: absolute;
+  inset: 0;
+  width: 101%;
+  height: 380px;
+  margin-left: -1%;
+  z-index: 0;
+}
+
+.parents_hero_image img {
+  display: block;
+}
+
+.parents_hero_card {
+  position: relative;
+  z-index: 1;
+  background-color: var(--gold-color);
+  color: var(--white-color);
+  width: 100%;
+  max-width: 1100px;
+  padding: 3rem 2.5rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+}
+
+.parents_hero_text {
+  max-width: 850px;
+  line-height: 1.6;
+}
+
+.parents_hero_btn {
+  margin-top: 0.5rem;
+}
+
+.school_testimonial_container {
+  width: 100%;
+  background-color: var(--white-color);
+  content: " ";
+  height: fit-content;
+  padding-top: 9rem;
+  padding-bottom: 2rem;
+  margin-top: -10rem;
+}
+
+@media (max-width: 1024px) {
+  .school_director {
+    gap: 2rem;
+    padding: 3rem 1.5rem;
+  }
+
+  .school_director_image {
+    width: 300px;
+    height: 300px;
+  }
+
+  .parents_hero {
+    padding: 0 1.5rem 2rem;
+  }
+  .parents_hero_image {
+    height: 320px;
+  }
+  .parents_hero_card {
+    padding: 2.5rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .school_director {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  .school_director_image {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+  }
+
+  .school_director_content {
+    align-items: center;
+  }
+
+  .parents_hero {
+    min-height: auto;
+    padding: 0 1rem 1.5rem;
+    flex-direction: column;
+  }
+  .parents_hero_image {
+    position: relative;
+    height: 220px;
+    margin-bottom: -2rem;
+  }
+  .parents_hero_card {
+    padding: 2rem 1.25rem;
+  }
+}
