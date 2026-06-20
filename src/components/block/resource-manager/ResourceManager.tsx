@@ -209,7 +209,9 @@ export default function ResourceManager({
             )}
           </li>
         ))}
-        {!loading && rows.length === 0 && <li className="admin_empty">Aucun élément pour le moment.</li>}
+        {!loading && rows.length === 0 && (
+          <li className="admin_empty">Aucun élément pour le moment.</li>
+        )}
       </ul>
 
       <ConfirmDialog

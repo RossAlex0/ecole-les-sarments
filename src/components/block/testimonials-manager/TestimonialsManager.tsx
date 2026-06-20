@@ -25,9 +25,11 @@ export default function TestimonialsManager() {
   const deleteTestimonial = useDeleteTestimonial();
 
   const [version, setVersion] = useState(0);
-  const { data, loading, error: fetchError } = useFetch<Testimonials[]>(
-    `/api/testimonial/admin?v=${version}`,
-  );
+  const {
+    data,
+    loading,
+    error: fetchError,
+  } = useFetch<Testimonials[]>(`/api/testimonial/admin?v=${version}`);
   const all = useMemo(() => data ?? [], [data]);
 
   const [filter, setFilter] = useState<Filter>("all");

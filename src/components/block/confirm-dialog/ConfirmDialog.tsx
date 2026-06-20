@@ -27,10 +27,20 @@ export default function ConfirmDialog({
         <h2 className="admin_confirm_title">{title}</h2>
         <p className="admin_confirm_message">{message}</p>
         <div className="admin_confirm_actions">
-          <button type="button" className="admin_btn admin_btn_ghost" onClick={onCancel} disabled={busy}>
+          <button
+            type="button"
+            className="admin_btn admin_btn_ghost"
+            onClick={onCancel}
+            disabled={busy}
+          >
             Annuler
           </button>
-          <button type="button" className="admin_btn admin_btn_danger" onClick={onConfirm} disabled={busy}>
+          <button
+            type="button"
+            className="admin_btn admin_btn_danger"
+            onClick={onConfirm}
+            disabled={busy}
+          >
             {busy ? "Suppression…" : confirmLabel}
           </button>
         </div>

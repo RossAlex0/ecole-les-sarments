@@ -173,7 +173,12 @@ export default function ResourceForm({
 
       <div className="admin_form_actions">
         {onCancel && (
-          <button type="button" className="admin_btn admin_btn_ghost" onClick={onCancel} disabled={busyAll}>
+          <button
+            type="button"
+            className="admin_btn admin_btn_ghost"
+            onClick={onCancel}
+            disabled={busyAll}
+          >
             Annuler
           </button>
         )}

@@ -46,7 +46,7 @@ Le critère d'accès aux données = **où s'exécute le composant**, PAS « fron
 Pourquoi pas `useFetch` partout : sur une page publique, `useFetch` (client) rend un HTML vide puis fetch après coup → contenu **non indexé par Google** (priorité SEO) + egress Supabase non maîtrisé.
 
 - **Lecture publique (SEO)** : Server Component → `getCached*` (`*.cache.ts`) enveloppé dans `unstable_cache({ tags, revalidate: false })`. Supabase interrogé une fois puis servi depuis le cache. Pages concernées : `src/app/school/page.tsx`, `src/app/student-life/page.tsx`.
-- **Lecture admin** : `useFetch(\`/api/<resource>?v=<version>\`)` dans le `ResourceManager` (route → controller → service), loading/error gérés, re-fetch en bumpant `version` après mutation.
+- **Lecture admin** : `useFetch(\`/api/<resource>?v=<version>\`)`dans le`ResourceManager`(route → controller → service), loading/error gérés, re-fetch en bumpant`version` après mutation.
 - **Écriture admin** : routes API `POST`/`PATCH`/`DELETE` → controller → service (`supabaseAdmin`), puis `revalidateTag(CacheTag.X, "max")` pour régénérer le cache public. Côté client, une **requête = un hook** dans `utils/hooks/<resource>/` (fetch inline + `useCallback`).
 - **PAS de lib de cache client** (ni SWR, ni React Query) : cache natif Next côté public, `useFetch` côté admin.
 
