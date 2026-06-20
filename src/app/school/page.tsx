@@ -14,10 +14,7 @@ import { getCachedTestimonials } from "@/server/service/testimonial/testimonial.
 import { storageUrl } from "@/lib/supabase/storage";
 
 export default async function SchoolPage() {
-  const [team, testimonials] = await Promise.all([
-    getCachedTeamMembers(),
-    getCachedTestimonials(),
-  ]);
+  const [team, testimonials] = await Promise.all([getCachedTeamMembers(), getCachedTestimonials()]);
 
   return (
     <section className="school">
