@@ -3,6 +3,7 @@ import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 import Separator from "@/components/ui/separator/Separator";
 import "./contact.css";
 import CardInfo from "@/components/block/card-info/CardInfo";
+import { contactMailto } from "@/utils/contact/contact";
 
 export default function ContactPage() {
   return (
@@ -64,6 +65,7 @@ export default function ContactPage() {
             title="Découvrir l'école"
             text="Nos portes ouvertes sont l'occasion de découvrir notre projet pédagogique, rencontrer l'équipe et visiter un cadre d'apprentissage chaleureux où chaque enfant grandit à son rythme."
             label="Contactez-nous"
+            href={contactMailto()}
             className="contact_discover_card"
           />
         </div>
