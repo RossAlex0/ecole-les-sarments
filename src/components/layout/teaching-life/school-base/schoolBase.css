@@ -21,3 +21,7 @@
 .school_base_image > img {
   object-fit: cover;
 }
+
+.school_base_midi {
+  text-align: center;
+}

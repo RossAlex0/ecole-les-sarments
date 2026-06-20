@@ -1,22 +1,21 @@
-import { LuHandHeart } from "react-icons/lu";
-import { PiMedalThin } from "react-icons/pi";
-import { VscCompass } from "react-icons/vsc";
+import { PiCompassRoseBold } from "react-icons/pi";
 import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 import "./schoolValues.css";
+import { GiOlive, GiMountainRoad } from "react-icons/gi";
 
 const values = [
   {
-    Icon: LuHandHeart,
-    title: "Bienveillance",
+    Icon: GiOlive,
+    title: "Croissance intégrale",
     description: "Chaque enfant est écouté, respecté et encouragé.",
   },
   {
-    Icon: PiMedalThin,
+    Icon: GiMountainRoad,
     title: "Exigence",
     description: "Nous aidons chaque élève à donner le meilleur de lui-même.",
   },
   {
-    Icon: VscCompass,
+    Icon: PiCompassRoseBold,
     title: "Sens",
     description: "Apprendre pour comprendre et grandir.",
   },

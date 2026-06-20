@@ -15,12 +15,11 @@ export default function Hero() {
           <span>
             L&apos;école Les Sarments
             <br />
-            école maternelle et primaire
+            école maternelle & primaire
             <br />
-            hors contrat
+            libre à Toulouse
           </span>
         </SarmentsText>
-        <SarmentsText format="text">Voir phrase avec Anne</SarmentsText>
         <SarmentsButton href={linkSchool}>Découvrir l&apos;école</SarmentsButton>
       </div>
     </section>

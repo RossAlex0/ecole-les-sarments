@@ -1,0 +1,93 @@
+.next_event {
+  width: 100%;
+  padding: 4rem 0rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.next_event_header {
+  max-width: 900px;
+  text-align: center;
+}
+
+.next_event_title_row {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.next_event_badge {
+  background-color: var(--gold-color);
+  color: var(--white-color);
+  padding: 0.5rem 1.2rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.next_event_subtitle {
+  margin-top: 1rem;
+  max-width: 780px;
+  line-height: 1.6;
+}
+
+/* Wrapper qui crée la bande dorée sous l'image */
+.next_event_image_wrapper {
+  width: 100%;
+  position: relative;
+  padding-bottom: 3rem;
+  margin-top: 1rem;
+}
+
+.next_event_image_wrapper::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60%;
+  background-color: var(--gold-color);
+  z-index: 0;
+}
+
+.next_event_image {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 7;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .next_event_image {
+    aspect-ratio: 16 / 8;
+  }
+}
+
+@media (max-width: 768px) {
+  .next_event {
+    padding: 2.5rem 1rem 0;
+  }
+
+  .next_event_title_row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .next_event_image {
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+  }
+
+  .next_event_image_wrapper {
+    padding-bottom: 2rem;
+  }
+}

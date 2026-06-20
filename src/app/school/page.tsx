@@ -104,27 +104,6 @@ export default function SchoolPage() {
             </Link>
           </div>
           <div>
-            <SarmentsText format="text">Projet pédagogique</SarmentsText>
-            {/* TODO - ajouter les link vers les fichiers */}
-            <Link href={"/"} className="school_footer_info_text">
-              Télécharger
-            </Link>
-          </div>
-          <div>
-            <SarmentsText format="text">Règlement intérieur</SarmentsText>
-            {/* TODO - ajouter les link vers les fichiers */}
-            <Link href={"/"} className="school_footer_info_text">
-              Télécharger
-            </Link>
-          </div>
-          <div>
-            <SarmentsText format="text">Charte de l&apos;école</SarmentsText>
-            {/* TODO - ajouter les link vers les fichiers */}
-            <Link href={"/"} className="school_footer_info_text">
-              Télécharger
-            </Link>
-          </div>
-          <div>
             <SarmentsText format="text">Uniformes scolaires</SarmentsText>
             {/* TODO - ajouter les link vers les fichiers */}
             <Link href={"/"} className="school_footer_info_text">

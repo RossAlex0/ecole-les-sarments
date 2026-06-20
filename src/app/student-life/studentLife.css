@@ -1,0 +1,76 @@
+.follow_us {
+  width: 100%;
+  padding: 2rem 1.5rem 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.follow_us_card {
+  width: 100%;
+  max-width: 1200px;
+  border: 1px solid var(--white-color);
+  border-radius: 16px;
+  padding: 3.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+}
+
+.follow_us_text {
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+.follow_us_links {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.follow_us_btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--white-color);
+  border-radius: 999px;
+  padding: 0.7rem 1.6rem;
+  color: var(--white-color);
+  font-weight: 500;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.follow_us_btn:hover {
+  background-color: var(--white-color);
+  color: var(--blue-color);
+}
+
+.follow_us_btn svg {
+  font-size: 1.1rem;
+}
+
+@media (max-width: 640px) {
+  .follow_us {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .follow_us_card {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .follow_us_links {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .follow_us_btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
