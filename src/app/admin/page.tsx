@@ -1,4 +1,6 @@
 import Link from "next/link";
+import AdminInfo from "@/components/block/admin-manager/admin-info/AdminInfo";
+import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 
 const SECTIONS = [
   {
@@ -28,10 +30,9 @@ export default function AdminHome() {
     <section className="admin_page">
       <header className="admin_page_head">
         <h1 className="admin_h1">Back office</h1>
-        <p className="admin_lead">
-          Espace de gestion du contenu du site. ⚠️ Accès non restreint pour l&apos;instant : ne pas
-          diffuser cette URL tant que l&apos;authentification n&apos;est pas en place.
-        </p>
+        <SarmentsText format="text" color="blue">
+          Espace de gestion du contenu du site. ⚠️ Toute manipulation est irréversible !
+        </SarmentsText>
       </header>
 
       <div className="admin_grid">
@@ -42,6 +43,21 @@ export default function AdminHome() {
           </Link>
         ))}
       </div>
+
+      <AdminInfo title="À quoi sert cet espace ?">
+        <SarmentsText format="text" color="blue">
+          Le back-office est l&apos;interface privée qui vous permet de gérer le contenu du site
+          <strong> sans toucher au code</strong>. Depuis ici, vous pouvez ajouter, modifier ou
+          supprimer les membres de l&apos;équipe et les événements, modérer et publier les
+          témoignages, et mettre à jour les fichiers (photo de la directrice, PDF). Chaque
+          changement enregistré est appliqué directement sur le site public.
+        </SarmentsText>
+        <SarmentsText format="text" color="blue">
+          ⏳ Une modification peut parfois ne pas apparaître <strong>immédiatement</strong> à cause
+          du cache (mémoire locale où se trouve la donnée) : rafraîchissez la page ou patientez
+          quelques secondes de plus.
+        </SarmentsText>
+      </AdminInfo>
     </section>
   );
 }

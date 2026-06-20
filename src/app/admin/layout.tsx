@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { createServerSupabase } from "@/lib/supabase/server";
-import AdminLogout from "@/components/block/admin-logout/AdminLogout";
+import AdminLogout from "@/components/block/admin-manager/admin-logout/AdminLogout";
 import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
 import { MdOutlineEventNote, MdOutlineViewArray } from "react-icons/md";
 import { RiDiscussFill, RiFileSettingsLine, RiTeamFill } from "react-icons/ri";
