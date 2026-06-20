@@ -50,6 +50,15 @@ export default function SarmentsButton({
     </button>
   );
 
-  // With `href` → navigation button (Link). Without `href` → action button (onClick).
-  return href ? <Link href={href}>{button}</Link> : button;
+  // No `href` → action button (onClick).
+  if (!href) return button;
+
+  // External URL → open in a new tab via a plain anchor; internal route → Next Link.
+  return /^https?:\/\//.test(href) ? (
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      {button}
+    </a>
+  ) : (
+    <Link href={href}>{button}</Link>
+  );
 }
