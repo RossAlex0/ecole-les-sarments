@@ -44,7 +44,7 @@ export default function Advantage() {
   ];
   return (
     <div className="advantage">
-      <SarmentsText format="fat-title">Les atouts de notre écoles</SarmentsText>
+      <SarmentsText format="fat-title">Les atouts de notre école</SarmentsText>
       <div className="advantage_content">
         {advantages.map((advantage) => (
           <div key={advantage.title} className="advantage_content_card">

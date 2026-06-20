@@ -11,6 +11,7 @@ import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
 import SchoolTestimonials from "@/components/layout/school/school-testimonials/SchoolTestimonials";
 import { getCachedTeamMembers } from "@/server/service/team-member/teamMember.cache";
 import { getCachedTestimonials } from "@/server/service/testimonial/testimonial.cache";
+import { storageUrl } from "@/lib/supabase/storage";
 
 export default async function SchoolPage() {
   const [team, testimonials] = await Promise.all([
@@ -26,7 +27,7 @@ export default async function SchoolPage() {
       <div className="school_director">
         <div className="school_director_image">
           <Image
-            src="https://funnkywkqepwqnasuuxe.supabase.co/storage/v1/object/public/ecole-les-sarments/team/direcfrice.webp"
+            src={storageUrl("ecole-les-sarments/team/direcfrice.webp")}
             alt="Armelle Da Rocha, directrice de l'école"
             fill
             sizes="(max-width: 768px) 100vw, 380px"
@@ -68,7 +69,7 @@ export default async function SchoolPage() {
             organise des événements, soutient les actions pédagogiques et crée un lien fort entre
             les familles et l&apos;équipe éducative.
           </SarmentsText>
-          <SarmentsButton href="/support" hasBorder className="parents_hero_btn">
+          <SarmentsButton href="/support-us" hasBorder className="parents_hero_btn">
             Soutenir l&apos;école
           </SarmentsButton>
         </div>

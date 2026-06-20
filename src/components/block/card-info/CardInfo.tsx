@@ -3,7 +3,7 @@ import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 
 import "./cardInfo.css";
 
-export type CardInfoProps = React.ButtonHTMLAttributes<HTMLDivElement> & {
+export type CardInfoProps = React.HTMLAttributes<HTMLDivElement> & {
   title: string;
   text: string;
   label?: string;
@@ -12,7 +12,7 @@ export type CardInfoProps = React.ButtonHTMLAttributes<HTMLDivElement> & {
 
 export default function CardInfo({ title, text, label, hideBtn, ...props }: CardInfoProps) {
   return (
-    <div {...props} className={`card_support ${props.className}`}>
+    <div {...props} className={`card_support ${props.className ?? ""}`.trim()}>
       <SarmentsText format="title">{title}</SarmentsText>
       <SarmentsText format="text">{text}</SarmentsText>
       {hideBtn ? undefined : (

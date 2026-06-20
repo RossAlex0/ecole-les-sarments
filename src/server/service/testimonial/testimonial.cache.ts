@@ -3,9 +3,9 @@ import { TestimonialService } from "./testimonial.service";
 import { CacheTag } from "../../cache/tags";
 
 /**
- * Lecture cachée des témoignages.
- * `revalidate: false` → Supabase n'est interrogé qu'une fois puis servi depuis le cache.
- * Le cache est régénéré via `revalidateTag(CacheTag.TESTIMONIALS)` depuis l'admin.
+ * Cached read of testimonials.
+ * `revalidate: false` → Supabase is queried only once, then served from cache.
+ * The cache is regenerated via `revalidateTag(CacheTag.TESTIMONIALS)` from the admin.
  */
 export const getCachedTestimonials = unstable_cache(
   async () => {

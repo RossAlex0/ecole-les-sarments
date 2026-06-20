@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { LuChevronDown } from "react-icons/lu";
 import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 import { Events } from "@/utils/types/table";
@@ -13,7 +12,15 @@ const LOAD_MORE_STEP = 3;
 
 export default function EventsList({ events }: { events: Events[] }) {
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
-  const [isShortDesc, setIsShortDesc] = useState(true);
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
+
+  const toggleExpanded = (id: string) =>
+    setExpandedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
 
   if (!events || events.length === 0) return null;
 
@@ -51,15 +58,17 @@ export default function EventsList({ events }: { events: Events[] }) {
               </SarmentsText>
 
               <SarmentsText format="text" color="blue" className="event_card_desc">
-                {isShortDesc ? (event.short_description ?? " ") : (event.description ?? " ")}
+                {expandedIds.has(event.id)
+                  ? (event.description ?? event.short_description ?? " ")
+                  : (event.short_description ?? " ")}
               </SarmentsText>
 
               <button
-                onClick={() => setIsShortDesc(!isShortDesc)}
+                onClick={() => toggleExpanded(event.id)}
                 className="event_card_link"
                 type="button"
               >
-                {isShortDesc ? "Voir plus" : "Voir moins"}
+                {expandedIds.has(event.id) ? "Voir moins" : "Voir plus"}
               </button>
             </div>
           </li>

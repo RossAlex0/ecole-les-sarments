@@ -1,8 +1,8 @@
 /**
- * Tags de cache centralisés.
- * Lecture : utilisés par les wrappers `unstable_cache` (src/server/service/*.cache.ts).
- * Écriture : l'admin appellera `revalidateTag(CacheTag.X)` dans ses Server Actions
- * pour régénérer le cache public uniquement après une modification.
+ * Centralized cache tags.
+ * Read: used by the `unstable_cache` wrappers (src/server/service/*.cache.ts).
+ * Write: the admin will call `revalidateTag(CacheTag.X)` in its Server Actions
+ * to regenerate the public cache only after a change.
  */
 export const CacheTag = {
   EVENTS: "events",

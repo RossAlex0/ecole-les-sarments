@@ -13,21 +13,21 @@ export default function SarmentsButton({
   theme,
   hasBorder,
   children,
-  href = "/",
+  href,
   ...props
 }: CustomButtonProps) {
   const customClass = `${theme === "dark" ? "dark_btn" : "light_btn"} ${hasBorder ? "border" : ""}`;
 
-  return (
-    <Link href={href}>
-      <button
-        type="button"
-        {...props}
-        className={`button_custom ${customClass} ${props.className}`}
-        aria-label="button"
-      >
-        <SarmentsText format="view">{children}</SarmentsText>
-      </button>
-    </Link>
+  const button = (
+    <button
+      type="button"
+      {...props}
+      className={`button_custom ${customClass} ${props.className ?? ""}`.trim()}
+    >
+      <SarmentsText format="view">{children}</SarmentsText>
+    </button>
   );
+
+  // With `href` → navigation button (Link). Without `href` → action button (onClick).
+  return href ? <Link href={href}>{button}</Link> : button;
 }

@@ -1,15 +1,6 @@
 import { TeamMemberService } from "../service/team-member/teamMember.service";
-import { NextResponse } from "next/server";
+import { handleRequest } from "./handleRequest";
 
 export const TeamMemberController = {
-  getAllTeamMembers: async () => {
-    try {
-      const teamMemberService = new TeamMemberService();
-
-      const team = await teamMemberService.getAll();
-      return NextResponse.json(team);
-    } catch (error) {
-      return NextResponse.json({ error: error }, { status: 500 });
-    }
-  },
+  getAllTeamMembers: () => handleRequest(() => new TeamMemberService().getAll()),
 };

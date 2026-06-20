@@ -3,9 +3,9 @@ import { TeamMemberService } from "./teamMember.service";
 import { CacheTag } from "../../cache/tags";
 
 /**
- * Lecture cachée des membres de l'équipe.
- * `revalidate: false` → Supabase n'est interrogé qu'une fois puis servi depuis le cache.
- * Le cache est régénéré via `revalidateTag(CacheTag.TEAM_MEMBERS)` depuis l'admin.
+ * Cached read of team members.
+ * `revalidate: false` → Supabase is queried only once, then served from cache.
+ * The cache is regenerated via `revalidateTag(CacheTag.TEAM_MEMBERS)` from the admin.
  */
 export const getCachedTeamMembers = unstable_cache(
   async () => {

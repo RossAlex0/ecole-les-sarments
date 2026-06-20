@@ -30,7 +30,13 @@ export default function SchoolBase({
         dans un cadre bienveillant qui encourage le goût d’apprendre.
       </SarmentsText>
       <div className="school_base_image">
-        <Image src={urlImage} fill loading="lazy" alt="classroom/" />
+        <Image
+          src={urlImage}
+          fill
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, 800px"
+          alt={`Salle de classe de l'école Les Sarments — ${title}`}
+        />
       </div>
       <SarmentsText format="title">La journée type</SarmentsText>
       <Timeline title={morning.title} steps={morning.steps} />

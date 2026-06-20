@@ -9,6 +9,6 @@ export const headerNavigation = [
 
 export type NavigationLabel = (typeof headerNavigation)[number]["label"];
 
-export const findNavigationLink = (label: NavigationLabel) => {
-  return headerNavigation.find((item) => item.label === label)!.link;
+export const findNavigationLink = (label: NavigationLabel): string => {
+  return headerNavigation.find((item) => item.label === label)?.link ?? "/";
 };
