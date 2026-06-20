@@ -34,13 +34,14 @@ export default function SchoolBase({
       </div>
       <SarmentsText format="title">La journée type</SarmentsText>
       <Timeline title={morning.title} steps={morning.steps} />
-      <div>
+      <div className="school_base_midi">
         <SarmentsText format="semi-title-medium">Midi</SarmentsText>
         <SarmentsText format="semi-title-medium" color="gold">
           {horaire}
         </SarmentsText>
         <SarmentsText format="text">
-          Temps du repas (panier repas fourni par les familles) et récréation
+          Temps du repas (panier repas fourni par les familles, surveillance par les enseignants) et
+          récréation
         </SarmentsText>
       </div>
       <Timeline title={afternoon.title} steps={afternoon.steps} />
