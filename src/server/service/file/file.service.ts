@@ -1,12 +1,14 @@
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { STORAGE_BUCKET, STORAGE_PATHS, publicFileUrl } from "@/lib/supabase/storage";
 
-export type FileKind = "director-image" | "frais-pdf" | "uniformes-pdf";
+export type FileKind = "director-image" | "frais-pdf" | "uniformes-pdf" | "ifi-pdf" | "legs-pdf";
 
 const PATH_BY_KIND: Record<FileKind, string> = {
   "director-image": STORAGE_PATHS.directorImage,
   "frais-pdf": STORAGE_PATHS.fraisPdf,
   "uniformes-pdf": STORAGE_PATHS.uniformesPdf,
+  "ifi-pdf": STORAGE_PATHS.ifiPdf,
+  "legs-pdf": STORAGE_PATHS.legsPdf,
 };
 
 export class FileService {

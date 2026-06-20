@@ -1,7 +1,13 @@
 import { HttpError } from "../http/httpError";
 import { FileService, type FileKind } from "../service/file/file.service";
 
-const ALLOWED_KINDS: FileKind[] = ["director-image", "frais-pdf", "uniformes-pdf"];
+const ALLOWED_KINDS: FileKind[] = [
+  "director-image",
+  "frais-pdf",
+  "uniformes-pdf",
+  "ifi-pdf",
+  "legs-pdf",
+];
 
 export const FileController = {
   // Admin

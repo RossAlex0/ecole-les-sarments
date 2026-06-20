@@ -3,7 +3,7 @@
 import { useCallback } from "react";
 import { parseError } from "@/utils/http/parseError";
 
-export type UploadKind = "director-image" | "frais-pdf" | "uniformes-pdf";
+export type UploadKind = "director-image" | "frais-pdf" | "uniformes-pdf" | "ifi-pdf" | "legs-pdf";
 
 /** Returns a memoized function that uploads a managed file (fixed path, overwrite). */
 export function useUploadFile() {

@@ -38,7 +38,8 @@ const PROJECTS: Project[] = [
   },
   {
     title: "Rénover et équiper notre école",
-    intro: "Pour offrir de bonnes conditions d'apprentissage et de convivialité à nos élèves au quotidien.",
+    intro:
+      "Pour offrir de bonnes conditions d'apprentissage et de convivialité à nos élèves au quotidien.",
     image: {
       src: "/image/rebuild.webp",
       alt: "Cour de l'école Les Sarments à rénover",

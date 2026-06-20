@@ -30,6 +30,18 @@ const UPLOADS: Upload[] = [
     accept: "application/pdf",
     hint: "Remplace définitivement l'ancien PDF des uniformes.",
   },
+  {
+    kind: "ifi-pdf",
+    label: "PDF — Don IFI",
+    accept: "application/pdf",
+    hint: "Remplace définitivement l'ancien PDF lié au bouton « En savoir plus » du Don IFI (page Nous soutenir).",
+  },
+  {
+    kind: "legs-pdf",
+    label: "PDF — Dispositif LEGS",
+    accept: "application/pdf",
+    hint: "Remplace définitivement l'ancien PDF lié au bouton « En savoir plus » du legs (page Nous soutenir).",
+  },
 ];
 
 function UploadCard({ kind, label, accept, hint }: Upload) {

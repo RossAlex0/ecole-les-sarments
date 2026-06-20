@@ -6,6 +6,8 @@ export const STORAGE_PATHS = {
   directorImage: "team/direcfrice.webp",
   fraisPdf: "doc/tarifs-inscriptions-ecole-les-sarments.pdf",
   uniformesPdf: "doc/uniformes.pdf",
+  ifiPdf: "doc/SARMENTS - Flyer IFI 2026.pdf",
+  legsPdf: "doc/SARMENTS - Flyer LEG A5 .pdf",
 } as const;
 
 /**
@@ -17,7 +19,8 @@ export const STORAGE_PATHS = {
  */
 export function storageUrl(path: string): string {
   const base = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public`;
-  return `${base}/${path.replace(/^\/+/, "")}`;
+  // encodeURI keeps the "/" separators but percent-encodes spaces and the like.
+  return `${base}/${encodeURI(path.replace(/^\/+/, ""))}`;
 }
 
 /** Builds the public URL of an object inside the school bucket from its in-bucket path. */
