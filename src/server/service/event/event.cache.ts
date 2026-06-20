@@ -18,6 +18,16 @@ export const getCachedEvents = unstable_cache(
   { tags: [CacheTag.EVENTS], revalidate: false },
 );
 
+export const getCachedPublishedEvents = unstable_cache(
+  async () => {
+    const { data, error } = await new EventService().getPublished();
+    if (error) throw error;
+    return data ?? [];
+  },
+  ["events:published"],
+  { tags: [CacheTag.EVENTS], revalidate: false },
+);
+
 export const getCachedUpcomingNews = unstable_cache(
   async () => {
     const { data, error } = await new EventService().getNews();

@@ -1,3 +1,5 @@
-import { EventController } from "../../../server/controller/event.controller";
+import { EventController } from "@/server/controller/event.controller";
+import { publicRoute } from "@/server/http/route";
 
-export const GET = EventController.getAllEvents;
+// Public: published events.
+export const GET = publicRoute(EventController.getPublished);

@@ -35,12 +35,20 @@ Archi **Next API + App**. Flux de données :
 
 ## 🗃️ Stratégie de données & cache (décidée)
 
-Les données changent **rarement** et **uniquement via l'admin** (à venir). Choix d'archi : **cache natif Next, PAS de lib de cache client** (ni SWR, ni React Query).
+Le critère d'accès aux données = **où s'exécute le composant**, PAS « front vs back ». Un Server Component s'exécute uniquement sur le serveur (jamais envoyé au navigateur), donc y appeler le service en direct n'est pas « appeler un service depuis le front » : c'est de l'accès données côté serveur, et c'est le pattern Next recommandé (pas de hop HTTP inutile vers sa propre API).
 
-- **Lecture (site public)** : Server Component → fonction `getCached*` (`*.cache.ts`) qui appelle le service et est enveloppée dans `unstable_cache({ tags, revalidate: false })`. Supabase n'est interrogé qu'une fois puis servi depuis le cache → egress minimal + contenu indexable (SEO).
-- **Écriture (admin, à venir)** : Server Actions → insert/update Supabase + upload Storage (`supabaseAdmin`), puis `revalidateTag(CacheTag.X)` pour régénérer le cache public uniquement après modification.
-- `useFetch` (cache `Map` maison) n'est **plus utilisé par aucune page** — le réserver à d'éventuelles données réellement dynamiques côté client.
-- Pages data migrées (Server Component + `Promise.all` sur les caches) : `src/app/school/page.tsx`, `src/app/student-life/page.tsx`. Les autres pages ne consomment pas Supabase.
+**Règle :**
+| Contexte | Pattern data |
+|---|---|
+| **Server Component** (pages publiques SEO) | appelle le **service** en direct (via `getCached*`) — rendu HTML serveur = indexable |
+| **Client Component** (`"use client"` : admin, écrans interactifs) | **`useFetch` → route `/api` → controller → service**, avec loading/error |
+
+Pourquoi pas `useFetch` partout : sur une page publique, `useFetch` (client) rend un HTML vide puis fetch après coup → contenu **non indexé par Google** (priorité SEO) + egress Supabase non maîtrisé.
+
+- **Lecture publique (SEO)** : Server Component → `getCached*` (`*.cache.ts`) enveloppé dans `unstable_cache({ tags, revalidate: false })`. Supabase interrogé une fois puis servi depuis le cache. Pages concernées : `src/app/school/page.tsx`, `src/app/student-life/page.tsx`.
+- **Lecture admin** : `useFetch(\`/api/<resource>?v=<version>\`)` dans le `ResourceManager` (route → controller → service), loading/error gérés, re-fetch en bumpant `version` après mutation.
+- **Écriture admin** : routes API `POST`/`PATCH`/`DELETE` → controller → service (`supabaseAdmin`), puis `revalidateTag(CacheTag.X, "max")` pour régénérer le cache public. Côté client, une **requête = un hook** dans `utils/hooks/<resource>/` (fetch inline + `useCallback`).
+- **PAS de lib de cache client** (ni SWR, ni React Query) : cache natif Next côté public, `useFetch` côté admin.
 
 ## Conventions
 

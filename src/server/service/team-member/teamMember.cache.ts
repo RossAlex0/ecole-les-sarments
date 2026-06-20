@@ -9,7 +9,7 @@ import { CacheTag } from "../../cache/tags";
  */
 export const getCachedTeamMembers = unstable_cache(
   async () => {
-    const { data, error } = await new TeamMemberService().getAll();
+    const { data, error } = await new TeamMemberService().getPublished();
     if (error) throw error;
     return data ?? [];
   },
