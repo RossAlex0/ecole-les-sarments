@@ -1,9 +1,17 @@
+"use client";
+
+import { useCallback, useState } from "react";
 import Image from "next/image";
 import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
+import AdmissionModal from "@/components/block/admission-modal/AdmissionModal";
 import "./schoolHero.css";
 
 export default function SchoolHero() {
+  const [admissionOpen, setAdmissionOpen] = useState(false);
+  const openAdmission = useCallback(() => setAdmissionOpen(true), []);
+  const closeAdmission = useCallback(() => setAdmissionOpen(false), []);
+
   return (
     <section className="school_hero">
       <div className="school_hero_content">
@@ -18,14 +26,16 @@ export default function SchoolHero() {
         </SarmentsText>
 
         <div className="school_hero_buttons">
-          <SarmentsButton href="/admission" hasBorder theme="dark">
+          <SarmentsButton hasBorder theme="dark" onClick={openAdmission}>
             Demande d&apos;admission
           </SarmentsButton>
-          <SarmentsButton href="/informations" hasBorder theme="dark">
+          <SarmentsButton href="#informations" hasBorder theme="dark">
             Informations pratiques
           </SarmentsButton>
         </div>
       </div>
+
+      <AdmissionModal open={admissionOpen} onClose={closeAdmission} />
 
       <div className="school_hero_image">
         <Image

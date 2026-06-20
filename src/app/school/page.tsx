@@ -89,7 +89,7 @@ export default async function SchoolPage() {
               Télécharger
             </Link>
           </div>
-          <div>
+          <div id="informations">
             <SarmentsText format="text">Uniformes scolaires</SarmentsText>
             {/* TODO - ajouter les link vers les fichiers */}
             <Link href={"/"} className="school_footer_info_text">
