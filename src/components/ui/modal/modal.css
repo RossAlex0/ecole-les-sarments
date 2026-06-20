@@ -1,0 +1,73 @@
+.modal_overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(11, 41, 71, 0.672);
+  backdrop-filter: blur(8px);
+  animation: modal_overlay_in 0.2s ease;
+}
+
+.modal_panel {
+  position: relative;
+  width: 100%;
+  max-width: 1140px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--white-color);
+  border-radius: 16px;
+  padding: 3rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  animation: modal_panel_in 0.22s ease;
+}
+
+.modal_close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--blue-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.modal_close:hover {
+  background: rgba(11, 41, 71, 0.08);
+}
+
+@keyframes modal_overlay_in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal_panel_in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .modal_panel {
+    padding: 2.5rem 1.25rem 1.5rem;
+  }
+}

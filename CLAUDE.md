@@ -34,6 +34,7 @@ Archi **Next API + App**. Flux de données :
 - `src/lib/supabase/` — clients (`client.ts`, `admin.ts`) + `database.types.ts` généré
 
 ## 🗃️ Stratégie de données & cache (décidée)
+
 Les données changent **rarement** et **uniquement via l'admin** (à venir). Choix d'archi : **cache natif Next, PAS de lib de cache client** (ni SWR, ni React Query).
 
 - **Lecture (site public)** : Server Component → fonction `getCached*` (`*.cache.ts`) qui appelle le service et est enveloppée dans `unstable_cache({ tags, revalidate: false })`. Supabase n'est interrogé qu'une fois puis servi depuis le cache → egress minimal + contenu indexable (SEO).
@@ -47,6 +48,7 @@ Les données changent **rarement** et **uniquement via l'admin** (à venir). Cho
 - Composant = dossier kebab-case + `PascalCase.tsx` + `lowercase.css` co-localisé. Classes CSS en `snake_case` préfixées du nom du composant.
 - Icônes : **react-icons** uniquement.
 - Imports : alias `@/` partout (`@/components`, `@/utils`, `@/lib`, `@/server`) — sauf imports relatifs **au sein de** `server/`.
+- **Hooks** : éviter `useEffect` sauf vrai effet de bord (écouteurs DOM, abonnements, synchro externe) — pas de re-renders en cascade. Mémoïser explicitement avec `useMemo`/`useCallback` (calculs coûteux, handlers stables), **même si react-compiler est activé** (choix projet de contrôle explicite).
 - `npm run db:types` régénère les types Supabase après un changement de schéma.
 
 ## ⚡ Performance & contraintes Supabase (free tier)

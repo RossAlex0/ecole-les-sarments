@@ -3,20 +3,26 @@ import SarmentsText from "../sarmentsText/SarmentsText";
 import "./sarmentsButton.css";
 
 export type CustomButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  theme?: "dark" | "light";
+  theme?: "dark" | "light" | "transparent";
   hasBorder?: boolean;
   children: React.ReactNode;
   href?: string;
 };
 
+const themeClass = {
+  dark: "dark_btn",
+  light: "light_btn",
+  transparent: "transparent_btn",
+} as const;
+
 export default function SarmentsButton({
-  theme,
+  theme = "light",
   hasBorder,
   children,
   href,
   ...props
 }: CustomButtonProps) {
-  const customClass = `${theme === "dark" ? "dark_btn" : "light_btn"} ${hasBorder ? "border" : ""}`;
+  const customClass = `${themeClass[theme]} ${hasBorder ? "border" : ""}`;
 
   const button = (
     <button

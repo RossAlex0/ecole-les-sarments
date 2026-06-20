@@ -1,11 +1,19 @@
+"use client";
+
+import { useCallback, useState } from "react";
 import Separator from "@/components/ui/separator/Separator";
 import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 import "./footer.css";
 import { RiFacebookFill, RiInstagramLine } from "react-icons/ri";
 import Image from "next/image";
 import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
+import AdmissionModal from "@/components/block/admission-modal/AdmissionModal";
 
 export default function Footer() {
+  const [admissionOpen, setAdmissionOpen] = useState(false);
+  const openAdmission = useCallback(() => setAdmissionOpen(true), []);
+  const closeAdmission = useCallback(() => setAdmissionOpen(false), []);
+
   return (
     <section className="footer">
       <div className="parent col">
@@ -69,10 +77,12 @@ export default function Footer() {
         </div>
       </div>
       <div className="parent">
-        <SarmentsButton theme="dark" hasBorder>
+        <SarmentsButton theme="dark" hasBorder onClick={openAdmission}>
           Faire une demande d&apos;admission
         </SarmentsButton>
       </div>
+
+      <AdmissionModal open={admissionOpen} onClose={closeAdmission} />
     </section>
   );
 }
