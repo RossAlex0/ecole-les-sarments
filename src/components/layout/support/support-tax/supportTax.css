@@ -1,0 +1,114 @@
+.support_tax {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.support_tax_heading {
+  margin-bottom: 2rem;
+}
+
+.support_tax_rows {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.support_tax_row {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  align-items: center;
+}
+
+/* Image is larger than the card and sits on top of it. */
+.support_tax_image {
+  position: relative;
+  z-index: 2;
+  min-height: 320px;
+  width: calc(100% + 3rem);
+  margin-right: -5rem;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
+}
+
+.support_tax_image img {
+  object-fit: cover;
+}
+
+/* No z-index here, so the badge child can paint above the image. */
+.support_tax_card {
+  position: relative;
+  background-color: var(--white-color);
+  border-radius: 20px;
+  /* extra left padding leaves room for the overlapping image */
+  padding: 2.5rem 2.5rem 2.5rem 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.5rem;
+  text-align: right;
+}
+
+.support_tax_badge {
+  position: absolute;
+  z-index: 3;
+  left: 5rem;
+  top: -2.5rem;
+  width: 104px;
+  border: 1.5px solid var(--gold-color);
+  border-radius: 6px;
+  padding: 0.2rem 0.2rem;
+}
+
+.support_tax_badge > div {
+  padding: 0.85rem 0.5rem;
+  background-color: var(--gold-color);
+  border-radius: 6px;
+  text-align: center;
+  line-height: 1.15;
+}
+
+.support_tax_limit {
+  max-width: 360px;
+  margin: 0.25rem 0 0.75rem;
+}
+
+@media (max-width: 900px) {
+  .support_tax_row {
+    grid-template-columns: 1fr;
+  }
+
+  .support_tax_image {
+    z-index: 2;
+    min-height: 0;
+    width: 100%;
+    margin: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .support_tax_card {
+    z-index: 1;
+    margin: -3rem 1rem 0;
+    padding: 3rem 1.75rem 2rem;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .support_tax_badge {
+    position: static;
+    margin-bottom: 0.5rem;
+  }
+
+  .support_tax_limit {
+    max-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .support_tax {
+    padding: 1.5rem 1rem;
+  }
+}
