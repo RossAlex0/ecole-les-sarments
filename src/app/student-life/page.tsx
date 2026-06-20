@@ -1,15 +1,15 @@
-"use client";
 import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 import Link from "next/link";
 import "./studentLife.css";
 import { FaFacebookF, FaInstagram } from "react-icons/fa6";
 import NextEvent from "@/components/layout/event/next-event/NextEvent";
 import EventsList from "@/components/layout/event/event-list/EventList";
-import useFetch from "@/utils/hooks/useFetch";
-import { Events } from "@/utils/types/table";
-import Loading from "../loading";
+import {
+  getCachedNextEvent,
+  getCachedUpcomingNews,
+} from "@/server/service/event/event.cache";
 
-export const socials = [
+const socials = [
   {
     label: "Facebook",
     href: "https://www.facebook.com/profile.php?id=61587126793877",
@@ -22,26 +22,16 @@ export const socials = [
   },
 ];
 
-export default function StudentLifePage() {
-  const {
-    data: nextEvent,
-    loading: nextEventLoading,
-    error: nextEventError,
-  } = useFetch<Events>("/api/event/next");
-  const {
-    data: news,
-    loading: newsLoading,
-    error: newsError,
-  } = useFetch<Events[]>("/api/event/news");
-
-  if (nextEventLoading || newsLoading) {
-    return <Loading />;
-  }
+export default async function StudentLifePage() {
+  const [nextEvent, news] = await Promise.all([
+    getCachedNextEvent(),
+    getCachedUpcomingNews(),
+  ]);
 
   return (
     <section style={{ paddingTop: "14vh" }}>
-      {nextEventError || !nextEvent ? undefined : <NextEvent event={nextEvent} />}
-      {newsError || !news ? undefined : <EventsList events={news} />}
+      {nextEvent && <NextEvent event={nextEvent} />}
+      {news.length > 0 && <EventsList events={news} />}
       <section className="follow_us">
         <div className="follow_us_card">
           <SarmentsText format="title">Suivez la vie des Sarments</SarmentsText>

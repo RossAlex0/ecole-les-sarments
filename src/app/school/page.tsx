@@ -1,34 +1,22 @@
-"use client";
 import Image from "next/image";
 import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 import SchoolHero from "@/components/layout/school/school-hero/SchoolHero";
 import SchoolValues from "@/components/layout/school/school-values/SchoolValues";
-import SchoolTeam, { TeamMember } from "@/components/layout/school/school-team/SchoolTeam";
-import useFetch from "@/utils/hooks/useFetch";
-import Loading from "../loading";
+import SchoolTeam from "@/components/layout/school/school-team/SchoolTeam";
 import Timeline from "@/components/ui/timeline/Timeline";
 import { schoolUtilsData } from "@/components/layout/school/schoolUtilsData";
 import Link from "next/link";
 import "./school.css";
 import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
 import SchoolTestimonials from "@/components/layout/school/school-testimonials/SchoolTestimonials";
-import { Testimonials } from "@/utils/types/table";
+import { getCachedTeamMembers } from "@/server/service/team-member/teamMember.cache";
+import { getCachedTestimonials } from "@/server/service/testimonial/testimonial.cache";
 
-export default function SchoolPage() {
-  const {
-    data: teams,
-    loading: teamsLoading,
-    error: teamsError,
-  } = useFetch<TeamMember[]>("/api/team-member");
-  const {
-    data: testimonials,
-    loading: testimonialsLoading,
-    error: testimonialsError,
-  } = useFetch<Testimonials[]>("/api/testimonial");
-
-  if (teamsLoading || testimonialsLoading) {
-    return <Loading />;
-  }
+export default async function SchoolPage() {
+  const [team, testimonials] = await Promise.all([
+    getCachedTeamMembers(),
+    getCachedTestimonials(),
+  ]);
 
   return (
     <section className="school">
@@ -56,7 +44,7 @@ export default function SchoolPage() {
           </SarmentsText>
         </div>
       </div>
-      {teamsError ? undefined : <SchoolTeam team={teams!} />}
+      {team.length > 0 && <SchoolTeam team={team} />}
       <div className="parents_hero">
         <div className="parents_hero_image">
           <Image
@@ -86,7 +74,7 @@ export default function SchoolPage() {
         </div>
       </div>
       <div className="school_testimonial_container">
-        {testimonialsError ? undefined : <SchoolTestimonials testimonials={testimonials!} />}
+        {testimonials.length > 0 && <SchoolTestimonials testimonials={testimonials} />}
       </div>
       <div className="school_footer">
         <div className="school_footer_timeline">

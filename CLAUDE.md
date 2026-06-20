@@ -27,16 +27,26 @@ Archi **Next API + App**. Flux de données :
 - `src/app/` — pages (App Router) et routes API
 - `src/server/controller/` — controllers : try/catch obligatoire, renvoient `NextResponse.json(...)`
 - `src/server/service/` — classes service : requêtes Supabase, renvoient le résultat brut
+- `src/server/service/<resource>/*.cache.ts` — **lectures cachées** (`unstable_cache` + tags) consommées par les Server Components
+- `src/server/cache/tags.ts` — tags de cache centralisés (`CacheTag`), partagés lecture/écriture
 - `src/components/` — `ui/` (atomiques), `layout/` (sections), `block/` (blocs composés)
 - `src/utils/` — `types/table.ts` (enum `SupabaseTable` + types `Row`), `hooks/useFetch.ts`, `navigation/`, `date/`
 - `src/lib/supabase/` — clients (`client.ts`, `admin.ts`) + `database.types.ts` généré
+
+## 🗃️ Stratégie de données & cache (décidée)
+Les données changent **rarement** et **uniquement via l'admin** (à venir). Choix d'archi : **cache natif Next, PAS de lib de cache client** (ni SWR, ni React Query).
+
+- **Lecture (site public)** : Server Component → fonction `getCached*` (`*.cache.ts`) qui appelle le service et est enveloppée dans `unstable_cache({ tags, revalidate: false })`. Supabase n'est interrogé qu'une fois puis servi depuis le cache → egress minimal + contenu indexable (SEO).
+- **Écriture (admin, à venir)** : Server Actions → insert/update Supabase + upload Storage (`supabaseAdmin`), puis `revalidateTag(CacheTag.X)` pour régénérer le cache public uniquement après modification.
+- `useFetch` (cache `Map` maison) n'est **plus utilisé par aucune page** — le réserver à d'éventuelles données réellement dynamiques côté client.
+- Pages data migrées (Server Component + `Promise.all` sur les caches) : `src/app/school/page.tsx`, `src/app/student-life/page.tsx`. Les autres pages ne consomment pas Supabase.
 
 ## Conventions
 
 - **Composants réutilisables avant tout** : factoriser au maximum. Avant de créer un composant, vérifier s'il en existe déjà un dans `ui/` qui couvre le besoin (`SarmentsText`, `SarmentsButton`, `Quote`, `Counter`, `Timeline`, `Separator`, `Toggle`…).
 - Composant = dossier kebab-case + `PascalCase.tsx` + `lowercase.css` co-localisé. Classes CSS en `snake_case` préfixées du nom du composant.
 - Icônes : **react-icons** uniquement.
-- Imports : alias `@/` partout (sauf imports relatifs au sein de `server/`).
+- Imports : alias `@/` partout (`@/components`, `@/utils`, `@/lib`, `@/server`) — sauf imports relatifs **au sein de** `server/`.
 - `npm run db:types` régénère les types Supabase après un changement de schéma.
 
 ## ⚡ Performance & contraintes Supabase (free tier)
@@ -54,7 +64,7 @@ Supabase est en **version gratuite** : ressources limitées, perfs moyennes. Con
 
 - **Toute** opération réseau / Supabase est protégée (try/catch côté controller, vérif `error` côté service).
 - Côté client : gérer `loading` ET `error` de `useFetch` ; afficher un fallback, jamais un crash.
-- Utiliser `error.tsx` / `not-found.tsx` (App Router) pour les erreurs de rendu. Jamais d'écran blanc.
+- `error.tsx` (racine) et `not-found.tsx` (App Router) en place pour les erreurs de rendu. Jamais d'écran blanc.
 
 ## 🔎 SEO (priorité n°1)
 
