@@ -1,97 +1,116 @@
-# Ecole Les Sarments
+# École Les Sarments
 
-Site **vitrine** pour l'école Les Sarments, école **hors contrat** maternelle/primaire à Toulouse.
+Site **vitrine** pour l'école Les Sarments — école **hors contrat** maternelle & primaire à Toulouse.
+Public **francophone** (familles toulousaines). Site **mono-langue (français)**, pas d'i18n.
 
-## 🎯 Mission
+> **Le code est en anglais** (commentaires, noms de variables/fonctions, constantes). Seul le **contenu destiné aux visiteurs** (copy) est en français.
 
-Donner un **maximum de visibilité** à l'école. Objectif business : **être la 1ʳᵉ école à apparaître sur Google** pour les recherches d'écoles à Toulouse.
-Les 3 priorités qui guident chaque décision technique :
+## 🎯 Mission & priorités
 
-1. **SEO** — chaque page doit être optimisée au maximum (voir section dédiée).
-2. **Performance & UX** — zéro latence ressentie, pas de crash, chargement rapide.
-3. **Robustesse** — toute erreur doit être gérée gracieusement (jamais d'écran blanc / crash visible).
+Objectif business : **maximiser la visibilité** de l'école — être **la 1ʳᵉ école à apparaître sur Google** pour les recherches d'écoles à Toulouse.
 
-## Stack
+Priorités qui arbitrent **chaque** décision technique, dans cet ordre :
 
-- **Next.js 16** App Router, **React 19** (react-compiler activé), TypeScript
-- **Supabase** (`@supabase/supabase-js`) — base de données + stockage d'images
-- **react-icons** — **toujours** utiliser cette lib pour les icônes (pas de SVG inline ad hoc)
-- `swiper` (carrousels)
-- Lint : ESLint (`npm run lint`) · Format : Prettier (`npm run format`)
+1. **Free / zéro maintenance** _(strict)_ — uniquement des outils open-source & gratuits ; aucune dépendance ni service payant ; rien qui demande de la maintenance dev régulière.
+2. **SEO** — chaque page optimisée au maximum.
+3. **Performance** — chargement rapide, zéro latence ressentie.
+4. **UX** — parcours fluide, états de chargement clairs, pas de layout shift.
+5. **Robustesse** — toute erreur gérée gracieusement, jamais d'écran blanc.
 
-## Architecture
+## 🧰 Stack & règles de dépendances
 
-Archi **Next API + App**. Flux de données :
-`app/api/<resource>/route.ts` → `server/controller/*.controller.ts` → `server/service/<resource>/*.service.ts` → Supabase.
+**Stack figée :**
 
-- `src/app/` — pages (App Router) et routes API
-- `src/server/controller/` — controllers : try/catch obligatoire, renvoient `NextResponse.json(...)`
-- `src/server/service/` — classes service : requêtes Supabase, renvoient le résultat brut
-- `src/server/service/<resource>/*.cache.ts` — **lectures cachées** (`unstable_cache` + tags) consommées par les Server Components
-- `src/server/cache/tags.ts` — tags de cache centralisés (`CacheTag`), partagés lecture/écriture
-- `src/components/` — `ui/` (atomiques), `layout/` (sections), `block/` (blocs composés)
-- `src/utils/` — `types/table.ts` (enum `SupabaseTable` + types `Row`), `hooks/useFetch.ts`, `navigation/`, `date/`
-- `src/lib/supabase/` — clients (`client.ts`, `admin.ts`) + `database.types.ts` généré
+- **Next.js 16** (App Router, Turbopack) · **React 19** (react-compiler activé) · **TypeScript**
+- **Supabase** (`@supabase/supabase-js` + `@supabase/ssr`) — base de données, auth, stockage
+- **react-icons** — seule source d'icônes
+- **swiper** — carrousels
+- **CSS pur co-localisé** (pas de Tailwind, pas de CSS-in-JS)
+- **npm** · ESLint (`npm run lint`) · Prettier (`npm run format`)
+- Hébergement **Vercel (offre gratuite)** + CI/CD GitHub
 
-## 🗃️ Stratégie de données & cache (décidée)
+**Règles de dépendances (strict) :**
 
-Le critère d'accès aux données = **où s'exécute le composant**, PAS « front vs back ». Un Server Component s'exécute uniquement sur le serveur (jamais envoyé au navigateur), donc y appeler le service en direct n'est pas « appeler un service depuis le front » : c'est de l'accès données côté serveur, et c'est le pattern Next recommandé (pas de hop HTTP inutile vers sa propre API).
+- **Gratuit & open-source uniquement** — aucune lib ni SaaS payant.
+- **Privilégier le natif Next/React** avant d'ajouter une lib externe.
+- **Pas de lib lourde/gourmande** sauf nécessité réelle justifiée.
+- **Pas de lib obsolète / non maintenue** — vérifier l'activité du repo avant d'ajouter.
 
-**Règle :**
-| Contexte | Pattern data |
-|---|---|
-| **Server Component** (pages publiques SEO) | appelle le **service** en direct (via `getCached*`) — rendu HTML serveur = indexable |
-| **Client Component** (`"use client"` : admin, écrans interactifs) | **`useFetch` → route `/api` → controller → service**, avec loading/error |
+## 🏛️ Architecture — MVC
 
-Pourquoi pas `useFetch` partout : sur une page publique, `useFetch` (client) rend un HTML vide puis fetch après coup → contenu **non indexé par Google** (priorité SEO) + egress Supabase non maîtrisé.
+Flux : `app/api/<resource>/route.ts` (wrapper) → `server/controller/*.controller.ts` (pur) → `server/service/<resource>/*.service.ts` (Supabase).
 
-- **Lecture publique (SEO)** : Server Component → `getCached*` (`*.cache.ts`) enveloppé dans `unstable_cache({ tags, revalidate: false })`. Supabase interrogé une fois puis servi depuis le cache. Pages concernées : `src/app/school/page.tsx`, `src/app/student-life/page.tsx`.
-- **Lecture admin** : `useFetch(\`/api/<resource>?v=<version>\`)`dans le`ResourceManager`(route → controller → service), loading/error gérés, re-fetch en bumpant`version` après mutation.
-- **Écriture admin** : routes API `POST`/`PATCH`/`DELETE` → controller → service (`supabaseAdmin`), puis `revalidateTag(CacheTag.X, "max")` pour régénérer le cache public. Côté client, une **requête = un hook** dans `utils/hooks/<resource>/` (fetch inline + `useCallback`).
-- **PAS de lib de cache client** (ni SWR, ni React Query) : cache natif Next côté public, `useFetch` côté admin.
+- **Route** (`route.ts`) — composée via `publicRoute(handler)` / `adminRoute(handler)` (`server/http/route.ts`) : applique l'auth (admin) + la sérialisation JSON & erreurs. **Aucune logique métier.**
+- **Controller** — **pur** : parse la requête, appelle le service, renvoie la data (`throw` sur erreur, capté par le wrapper). Pas d'auth, pas de try/catch HTTP.
+- **Service** — accès Supabase uniquement.
 
-## Conventions
+**Convention de routes (toute ressource) :**
 
-- **Composants réutilisables avant tout** : factoriser au maximum. Avant de créer un composant, vérifier s'il en existe déjà un dans `ui/` qui couvre le besoin (`SarmentsText`, `SarmentsButton`, `Quote`, `Counter`, `Timeline`, `Separator`, `Toggle`…).
-- Composant = dossier kebab-case + `PascalCase.tsx` + `lowercase.css` co-localisé. Classes CSS en `snake_case` préfixées du nom du composant.
-- Icônes : **react-icons** uniquement.
-- Imports : alias `@/` partout (`@/components`, `@/utils`, `@/lib`, `@/server`) — sauf imports relatifs **au sein de** `server/`.
-- **Hooks** : éviter `useEffect` sauf vrai effet de bord (écouteurs DOM, abonnements, synchro externe) — pas de re-renders en cascade. Mémoïser explicitement avec `useMemo`/`useCallback` (calculs coûteux, handlers stables), **même si react-compiler est activé** (choix projet de contrôle explicite).
-- `npm run db:types` régénère les types Supabase après un changement de schéma.
+- **Public** (sans auth) : `/api/<resource>` — GET des publiés (+ POST public si applicable).
+- **Admin** (`requireAdmin`) : `/api/<resource>/admin` (GET tous + POST), `/api/<resource>/admin/[id]` (PATCH/DELETE).
+- **Jamais** de `requireAdmin` « en place » sur une route potentiellement publique.
 
-## ⚡ Performance & contraintes Supabase (free tier)
+**Structure des dossiers :**
 
-Supabase est en **version gratuite** : ressources limitées, perfs moyennes. Conséquences à respecter :
+- `src/app/` — pages (route group `(pages)` pour le public) + routes API
+- `src/server/` — `http/` (wrappers route + `HttpError`), `auth/` (`requireAdmin`), `controller/`, `service/<resource>/` (+ `.cache.ts`), `cache/tags.ts`
+- `src/components/` — `ui/` (atomiques) · `layout/` (sections) · `block/` (blocs composés). Dossier **kebab-case** + `PascalCase.tsx` + `lowercase.css` co-localisé ; classes CSS **snake_case** préfixées du composant.
+- `src/utils/` — `form/`, `hooks/<resource>/`, `http/`, `types/`, `date/`, `navigation/`…
+- `src/lib/supabase/` — `client.ts` (anon), `admin.ts` (service role), `server.ts` / `browser.ts` (SSR auth), `storage.ts`, `database.types.ts`
+- `src/styles/` — CSS globaux + `admin.css`
+- `src/proxy.ts` — middleware Next 16 (protège `/admin`)
 
-- **Images** = ressource la plus coûteuse. Elles sont stockées sur Supabase Storage (quota limité).
-  - **Limiter le nombre d'images** ; pas d'abondance décorative.
-  - Servir en **WebP**, dimensionnées au besoin réel ; utiliser `next/image` (lazy-loading, `sizes`, `priority` seulement pour l'image LCP).
-  - Mettre en cache / réutiliser les URLs ; éviter les re-fetch inutiles (cf. cache de `useFetch`).
-- **Requêtes** : `select` uniquement les colonnes nécessaires, filtrer/limiter côté Supabase (`.eq`, `.gte`, `.limit`, `.single`), jamais côté client. Préférer le rendu serveur (Server Components / fetch côté serveur) pour le contenu indexable.
-- Pas de latence ressentie : skeletons/états de chargement, pas de layout shift.
+## 🗃️ Données, cache & auth
+
+**Lecture** (critère = _où s'exécute le composant_) :
+
+- **Server Component** (pages publiques SEO) → service en direct via `getCached*` → HTML serveur **indexable**.
+- **Client Component** (admin, interactif) → `useFetch` → route → controller → service (loading/error gérés). Choisi pour un **meilleur contrôle du cache** lors des manips admin ; la data publique change rarement, donc un cache qui persiste une session est acceptable.
+
+**Cache** : natif Next (`unstable_cache` + tags), invalidation par `revalidateTag(tag, "max")` après mutation admin. **PAS de lib de cache client** (SWR / React Query).
+
+**Accès Supabase :**
+
+- **Admin** (lectures complètes + écritures) → `supabaseAdmin` (service role, bypass RLS).
+- **Public** → client **anon** (RLS + filtre `is_published`).
+- La **clé service role** n'est **JAMAIS** exposée côté client ; requise seulement **au runtime** (jamais au build → fallback non-vide dans `admin.ts`).
+
+**Auth :** **utilisateur unique** Supabase (email/mot de passe). **Sign-ups désactivés** (dashboard). `requireAdmin` = une session Supabase valide suffit (= l'admin). `/admin` protégé par le middleware (`proxy.ts`).
+
+## ✍️ Conventions de code
+
+- **Langue** : code en **anglais** ; copy visiteur en **français**.
+- **Re-renders maîtrisés** : contrôler les rendus au maximum. `useEffect` **uniquement** pour de vrais effets de bord (listeners DOM, abonnements, synchro externe) — **jamais** pour dériver/synchroniser un state interne. Mémoïser explicitement (`useMemo` / `useCallback`) calculs coûteux & handlers, **même avec react-compiler**.
+- **Imports** : alias `@/` partout (`@/components`, `@/utils`, `@/lib`, `@/server`) — relatif uniquement **au sein de** `server/`. Créer l'alias dans `tsconfig.json` si un nouveau dossier le nécessite.
+- **Composants réutilisables d'abord** : vérifier `src/components/` avant d'en créer un ; factoriser.
+- **Icônes** : `react-icons` uniquement, rendues en JSX (`<Icon />`), jamais appelées comme fonction.
+- **Hooks data admin** : **un hook par mutation** (Create/Update/Delete) dans `utils/hooks/<resource>/` (fetch inline + `useCallback`, erreurs via `parseError`) — chaque mutation a ses particularités (à robustifier). Les **lectures** passent par `useFetch` directement (pas de hook de read dédié).
+- `npm run db:types` après tout changement de schéma Supabase.
+
+## ⚡ Performance & free tier (Supabase)
+
+- **Images** _(poste le plus coûteux)_ : **peu** d'images (pas de déco superflue), **WebP** dimensionnées au besoin, **`next/image`** obligatoire (lazy + `sizes`), `priority` **seulement** sur l'image LCP, `alt` descriptif.
+- **Requêtes** : toujours filtrer/limiter **côté Supabase** (`.eq` / `.gte` / `.limit` / `.single`), jamais côté client. `select` ciblé recommandé ; `select("*")` toléré sur les petites tables. Privilégier le **cache serveur** pour limiter l'egress.
+- **Rendu** : **zéro CLS** (réserver l'espace des images/blocs), états loading/skeleton, Core Web Vitals soignés (LCP prioritaire).
 
 ## 🛡️ Gestion d'erreurs (obligatoire)
 
-- **Toute** opération réseau / Supabase est protégée (try/catch côté controller, vérif `error` côté service).
-- Côté client : gérer `loading` ET `error` de `useFetch` ; afficher un fallback, jamais un crash.
-- `error.tsx` (racine) et `not-found.tsx` (App Router) en place pour les erreurs de rendu. Jamais d'écran blanc.
+- **Toute** opération réseau/Supabase est protégée : le wrapper de route renvoie `{ error: { message } }` + status ; le service renvoie le résultat brut (`{ data, error }`), le controller `throw` sur `error`.
+- **Client** : gérer `loading` **et** `error`, afficher un fallback — jamais de crash.
+- `error.tsx` (racine) + `not-found.tsx` en place. **Jamais d'écran blanc.**
 
-## 🔎 SEO (priorité n°1)
+## 🔎 SEO (priorité haute)
 
-> **État actuel : le SEO n'est PAS encore optimisé.** Les `metadata` sont centralisées dans le **layout racine** (`src/app/layout.tsx`) avec des valeurs placeholder, et plusieurs pages sont en `"use client"` (contenu rendu côté client). C'est le principal chantier d'amélioration. Objectif ci-dessous = cible à atteindre.
-
-- **Cible : metadata par page.** Migrer du `metadata` global du layout vers un `metadata` (ou `generateMetadata`) propre à **chaque page** : `title` unique et descriptif, `description`, `openGraph`, mots-clés ciblés **« école Toulouse », « école hors contrat Toulouse », « école maternelle/primaire Toulouse »**. Le layout ne garde qu'un fallback (`title.template`).
-- Contenu indexable rendu **côté serveur** (Server Components), pas uniquement via fetch client.
-- HTML sémantique : un seul `<h1>` par page, hiérarchie `<h2>/<h3>` cohérente, balises `<section>`, `<nav>`, `<main>`.
-- Toutes les images ont un `alt` descriptif et pertinent (compte pour le SEO image).
-- Liens internes explicites (texte d'ancre parlant) ; `sitemap.ts` et `robots.ts` à jour.
-- Données structurées JSON-LD (`EducationalOrganization` / `School`) sur la page d'accueil.
+- **Metadata** : la metadata principale du site (titre, description, `openGraph`) vit dans le **layout racine** via l'API `metadata` de Next ; une page peut ajouter/spécialiser sa metadata si pertinent.
+- **HTML sémantique optimisé** : un seul `<h1>` par page, hiérarchie `<h2>/<h3>` cohérente, balises `<main>` / `<section>` / `<nav>`.
+- **Contenu indexable rendu côté serveur** (Server Components), pas via fetch client.
+- `alt` descriptifs sur les images ; **liens internes** au texte d'ancre parlant.
+- `sitemap.ts` + `robots.ts` à jour ; **JSON-LD** `EducationalOrganization` sur l'accueil.
+- **Mots-clés cibles** : école Toulouse · maternelle · primaire · privé · hors contrat · éducation · savoir · bienveillance.
 - Core Web Vitals soignés (LCP image prioritaire, pas de CLS).
 
-## Skills disponibles
+## 🔧 Process de dev
 
-- `/new-page` — scaffold une page App Router avec `metadata` SEO complet
-- `/new-api-resource` — scaffold service + controller + route + types d'une ressource Supabase
-- `/new-component` — scaffold un composant React réutilisable conforme aux conventions
-- `/optimize-next` — playbook perf/rendu Next 16 (Server Components, caching, images, streaming)
-- `/optimize-supabase` — playbook perf/coût Supabase free tier (requêtes, egress, images, cache)
+- **Avant tout commit** : `npm run lint` (0 erreur) **et** `npx tsc --noEmit` (0 erreur hors `.next` généré).
+- **Git** : Claude **ne lance jamais** de commande git — il **propose** un message de commit **one-line** (Conventional Commits : `feat/fix/refactor/chore(scope): …`). L'utilisateur gère `add` / `commit` / `push`.
+- **Branches** : travailler sur des **branches dédiées** (feature), **jamais directement sur `main`**.
