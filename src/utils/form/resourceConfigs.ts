@@ -22,7 +22,7 @@ export const TEAM_FIELDS: FieldDef[] = [
     type: "image",
     folder: "team",
     pathField: "image_path",
-    hint: "Téléversez une photo (WebP de préférence). En modification, la nouvelle remplace l'ancienne au même emplacement.",
+    hint: "Téléversez une photo (WebP de préférence). Si l'image est trop lourde et que vous n'arrivez pas à créer ou modifier la photo, vous pouvez essayer de convertir votre image sur un site comme https://squoosh.app/.",
   },
   { name: "image_path", label: "", type: "hidden" },
   {
@@ -48,10 +48,22 @@ export const EVENT_FIELDS: FieldDef[] = [
     label: "Description courte",
     type: "textarea",
     required: true,
-    hint: "Résumé affiché dans les listes et les cartes.",
+    hint: "Résumé affiché par défaut dans les listes et les cartes.",
   },
-  { name: "description", label: "Description complète", type: "textarea", required: true },
-  { name: "start_at", label: "Date de début", type: "datetime", required: true },
+  {
+    name: "description",
+    label: "Description complète",
+    hint: "Texte complet affiché lorsqu'un visiteur clique sur « Voir plus ».",
+    type: "textarea",
+    required: true,
+  },
+  {
+    name: "start_at",
+    label: "Date de début",
+    hint: "Attention, la date ne peut être inférieure à la date d'aujourd'hui. Cette date servira de référence à un scheduler pour nettoyer les événements de plus de 10 mois.",
+    type: "datetime",
+    required: true,
+  },
   { name: "end_at", label: "Date de fin", type: "datetime", hint: "Optionnel." },
   { name: "location", label: "Lieu", type: "text", hint: "Optionnel." },
   {
@@ -60,14 +72,14 @@ export const EVENT_FIELDS: FieldDef[] = [
     type: "image",
     folder: "event",
     required: true,
-    hint: "Téléversez une image pour l'événement.",
+    hint: "Téléversez une photo (WebP de préférence). Si l'image est trop lourde et que vous n'arrivez pas à créer ou modifier la photo, vous pouvez essayer de convertir votre image sur un site comme https://squoosh.app/.",
   },
   {
     name: "is_event",
     label: "Événement",
     type: "checkbox",
     defaultValue: false,
-    hint: "Coché : mis en avant comme « prochain événement » et affiché en priorité. Décoché : apparaît uniquement dans la liste des actualités de la page Vie scolaire.",
+    hint: "Coché : mis en avant et affiché sur la page d'accueil, et en grand sur la page Vie scolaire. Décoché : apparaît uniquement dans la liste des actualités de la page Vie scolaire.",
   },
   {
     name: "is_published",
@@ -84,7 +96,7 @@ export const TESTIMONIAL_FIELDS: FieldDef[] = [
     label: "Auteur",
     type: "text",
     required: true,
-    hint: "Nom ou intitulé (ex. : Une maman de CE2).",
+    hint: "Nom ou intitulé (ex. : Une maman de CE2 / John Doe).",
   },
   { name: "content", label: "Témoignage", type: "textarea", required: true },
   {
@@ -93,5 +105,11 @@ export const TESTIMONIAL_FIELDS: FieldDef[] = [
     type: "text",
     hint: "Optionnel (ex. : Maternelle, CM1…).",
   },
-  { name: "is_published", label: "Publié sur le site", type: "checkbox", defaultValue: true },
+  {
+    name: "is_published",
+    label: "Publié sur le site",
+    type: "checkbox",
+    defaultValue: true,
+    hint: "Décoché = le témoignage est masqué du site public. Il sera possible de le rendre public par la suite.",
+  },
 ];
