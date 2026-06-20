@@ -7,7 +7,7 @@ const values = [
   {
     Icon: GiOlive,
     title: "Croissance intégrale",
-    description: "Chaque enfant est écouté, respecté et encouragé.",
+    description: "Chaque enfant déploie ses talents tout au long de sa scolarité.",
   },
   {
     Icon: GiMountainRoad,

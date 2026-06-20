@@ -36,7 +36,7 @@ export const preSchoolTimelineMorning: TimelineProps = {
     {
       id: "6",
       time: "11h – 11h30",
-      description: "Phonologie et manipulations mathématiques",
+      description: "Phonologie ou manipulations mathématiques",
       side: "right",
     },
   ],
@@ -82,7 +82,7 @@ export const preSchoolTimelineAfternoon: TimelineProps = {
     {
       id: "6",
       time: "16h – 16h30",
-      description: "Lecture, musique & ateliers",
+      description: "Lecture, musique ou ateliers",
       side: "left",
     },
     {

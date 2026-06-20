@@ -40,8 +40,8 @@ export default function SchoolBase({
           {horaire}
         </SarmentsText>
         <SarmentsText format="text">
-          Temps du repas (panier repas fourni par les familles, surveillance par les enseignants) et
-          récréation
+          Temps du repas (panier-repas fourni par les familles), avec surveillance par les
+          institutrices, suivi d&apos;un temps de récréation.
         </SarmentsText>
       </div>
       <Timeline title={afternoon.title} steps={afternoon.steps} />

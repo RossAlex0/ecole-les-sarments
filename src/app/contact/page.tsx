@@ -1,4 +1,3 @@
-// src/app/contact/page.tsx
 import { FaBus, FaTrain, FaCar, FaSquareParking } from "react-icons/fa6";
 import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 import Separator from "@/components/ui/separator/Separator";
@@ -10,8 +9,13 @@ export default function ContactPage() {
     <section className="contact">
       <div className="contact_location">
         <SarmentsText format="title" className="contact_title">
-          Où nous trouver
+          Où nous trouver ?
         </SarmentsText>
+        <SarmentsText format="text" className="contact_intro">
+          Située au 20 avenue Didier Daurat dans le quartier de Montaudran à Toulouse, l&apos;école
+          Les Sarments est facilement accessible en transports et en voiture.
+        </SarmentsText>
+
         <div className="contact_location_content">
           <ul className="contact_access">
             <li className="contact_access_item">

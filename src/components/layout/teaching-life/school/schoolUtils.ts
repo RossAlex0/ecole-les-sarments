@@ -18,7 +18,7 @@ export const schoolTimelineMorning: TimelineProps = {
     {
       id: "3",
       time: "9h30 – 10h",
-      description: "Écriture, grammaire & conjugaison",
+      description: "Écriture, grammaire ou conjugaison",
       side: "left",
     },
     {
@@ -48,7 +48,7 @@ export const schoolTimelineAfternoon: TimelineProps = {
     {
       id: "2",
       time: "13h30 – 14h30",
-      description: "Ateliers, phonologie, sciences, histoire",
+      description: "Ateliers, phonologie, sciences ou histoire",
       badges: [{ label: "CP" }],
       side: "left",
     },
