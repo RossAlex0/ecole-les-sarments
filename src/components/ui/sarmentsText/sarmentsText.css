@@ -23,19 +23,37 @@
   font-weight: "regular";
   font-family: var(--outfit-font);
 }
-/* En avant */
+/* Emphasis */
 .custom_text_view {
   font-size: 16px;
   font-weight: "medium";
+  font-family: var(--outfit-font);
+}
+/* Small text (hints, captions, counters) */
+.custom_text_small {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
   font-family: var(--outfit-font);
 }
 
 .text_white {
   color: var(--white-color);
 }
-.text_black {
+.text_black,
+.text_blue {
   color: var(--blue-color);
 }
 .text_gold {
   color: var(--gold-color);
+}
+/* Neutral / state variants (mainly for the admin) */
+.text_muted {
+  color: #5b6b7d;
+}
+.text_danger {
+  color: #c0392b;
+}
+.text_success {
+  color: #1e7e4f;
 }

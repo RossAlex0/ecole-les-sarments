@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createBrowserSupabase } from "@/lib/supabase/browser";
+import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -68,9 +69,9 @@ export default function AdminLoginPage() {
 
         {error && <p className="admin_error">{error}</p>}
 
-        <button type="submit" className="admin_btn admin_btn_primary" disabled={busy}>
+        <SarmentsButton theme="primary" type="submit" disabled={busy}>
           {busy ? "Connexion…" : "Se connecter"}
-        </button>
+        </SarmentsButton>
       </form>
     </div>
   );

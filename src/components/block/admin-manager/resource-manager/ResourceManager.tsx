@@ -2,8 +2,9 @@
 
 import { useCallback, useMemo, useState } from "react";
 import useFetch from "@/utils/hooks/useFetch";
-import ResourceForm from "@/components/block/resource-form/ResourceForm";
-import ConfirmDialog from "@/components/block/confirm-dialog/ConfirmDialog";
+import ResourceForm from "@/components/block/admin-manager/resource-form/ResourceForm";
+import ConfirmDialog from "@/components/block/admin-manager/confirm-dialog/ConfirmDialog";
+import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
 import {
   type FieldDef,
   type FormValues,
@@ -133,9 +134,9 @@ export default function ResourceManager({
       <div className="admin_manager_head">
         <span className="admin_count">{rows.length} élément(s)</span>
         {mode !== "create" && (
-          <button type="button" className="admin_btn admin_btn_primary" onClick={startCreate}>
+          <SarmentsButton theme="primary" onClick={startCreate}>
             {addLabel}
-          </button>
+          </SarmentsButton>
         )}
       </div>
 
@@ -188,22 +189,12 @@ export default function ResourceManager({
                   })()}
                 </span>
                 <div className="admin_row_actions">
-                  <button
-                    type="button"
-                    className="admin_btn admin_btn_ghost"
-                    onClick={() => startEdit(row)}
-                    disabled={busy}
-                  >
+                  <SarmentsButton theme="ghost" onClick={() => startEdit(row)} disabled={busy}>
                     Modifier
-                  </button>
-                  <button
-                    type="button"
-                    className="admin_btn admin_btn_danger"
-                    onClick={() => setToDelete(row)}
-                    disabled={busy}
-                  >
+                  </SarmentsButton>
+                  <SarmentsButton theme="danger" onClick={() => setToDelete(row)} disabled={busy}>
                     Supprimer
-                  </button>
+                  </SarmentsButton>
                 </div>
               </div>
             )}

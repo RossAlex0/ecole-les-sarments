@@ -1,12 +1,11 @@
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "./database.types";
 
-// Client admin - (Route Handlers, Server Actions)
-// Bypass RLS
-// ⚠️ Don't use in file "use client"
-// `?? " "` : fallback non-vide pour que le build ne lève pas "supabaseKey is
-// required" quand SUPABASE_SERVICE_ROLE_KEY est absente (ex. CI). La vraie clé
-// est présente au runtime ; ce client n'est jamais utilisé pendant le build.
+// Admin client (Route Handlers, Server Actions) — bypasses RLS.
+// ⚠️ Never import in a "use client" file.
+// `?? " "`: non-empty fallback so the build doesn't throw "supabaseKey is
+// required" when SUPABASE_SERVICE_ROLE_KEY is absent (e.g. CI). The real key is
+// present at runtime; this client is never used during the build.
 export const supabaseAdmin = createClient<Database>(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY ?? " ",

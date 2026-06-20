@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { useUploadFile, type UploadKind } from "@/utils/hooks/files/useUploadFile";
+import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
 
 type Upload = {
   kind: UploadKind;
@@ -15,7 +16,7 @@ const UPLOADS: Upload[] = [
     kind: "director-image",
     label: "Photo de la directrice",
     accept: "image/*",
-    hint: "Image (WebP de préférence). Remplace définitivement l'ancienne photo.",
+    hint: "Téléversez une photo (WebP de préférence). Si l'image est trop lourde et que vous n'arrivez pas à créer ou modifier la photo, vous pouvez essayer de convertir votre image sur un site comme https://squoosh.app/.",
   },
   {
     kind: "frais-pdf",
@@ -72,9 +73,9 @@ function UploadCard({ kind, label, accept, hint }: Upload) {
       {error && <p className="admin_error">{error}</p>}
       {status && <p className="admin_success">{status}</p>}
       <div className="admin_form_actions">
-        <button type="submit" className="admin_btn admin_btn_primary" disabled={busy}>
+        <SarmentsButton theme="primary" type="submit" disabled={busy}>
           {busy ? "Envoi…" : "Mettre à jour"}
-        </button>
+        </SarmentsButton>
       </div>
     </form>
   );

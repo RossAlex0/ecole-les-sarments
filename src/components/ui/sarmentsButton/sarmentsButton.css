@@ -37,3 +37,43 @@
 .transparent_btn:hover {
   background-color: rgba(0, 0, 0, 0.567);
 }
+
+/* Admin variants — rectangular action buttons used in the back office */
+.admin_button_base {
+  display: inline-block;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  width: fit-content;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.admin_button_base:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin_primary_btn {
+  background-color: var(--blue-color);
+}
+.admin_primary_btn:hover:not(:disabled) {
+  background-color: #11355c;
+}
+
+.admin_ghost_btn {
+  background-color: transparent;
+  border-color: #cfd8e3;
+}
+.admin_ghost_btn:hover:not(:disabled) {
+  background-color: #eef2f6;
+}
+
+.admin_danger_btn {
+  background-color: #c0392b;
+}
+.admin_danger_btn:hover:not(:disabled) {
+  background-color: #a93226;
+}

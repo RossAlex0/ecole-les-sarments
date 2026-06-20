@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { useUploadImage } from "@/utils/hooks/files/useUploadImage";
+import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
 import type { FieldDef, FormValues } from "@/utils/form/fields";
 
 type ResourceFormProps = {
@@ -173,18 +174,13 @@ export default function ResourceForm({
 
       <div className="admin_form_actions">
         {onCancel && (
-          <button
-            type="button"
-            className="admin_btn admin_btn_ghost"
-            onClick={onCancel}
-            disabled={busyAll}
-          >
+          <SarmentsButton theme="ghost" onClick={onCancel} disabled={busyAll}>
             Annuler
-          </button>
+          </SarmentsButton>
         )}
-        <button type="submit" className="admin_btn admin_btn_primary" disabled={busyAll}>
+        <SarmentsButton theme="primary" type="submit" disabled={busyAll}>
           {uploading ? "Envoi de l'image…" : busy ? "Enregistrement…" : submitLabel}
-        </button>
+        </SarmentsButton>
       </div>
     </form>
   );
