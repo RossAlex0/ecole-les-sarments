@@ -1,6 +1,6 @@
 "use client";
 
-import ResourceManager from "@/components/block/resource-manager/ResourceManager";
+import ResourceManager from "@/components/block/admin-manager/resource-manager/ResourceManager";
 import { EVENT_FIELDS } from "@/utils/form/resourceConfigs";
 import { useCreateEvent } from "@/utils/hooks/events/useCreateEvent";
 import { useUpdateEvent } from "@/utils/hooks/events/useUpdateEvent";

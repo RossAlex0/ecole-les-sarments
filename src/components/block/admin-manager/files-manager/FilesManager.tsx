@@ -15,7 +15,7 @@ const UPLOADS: Upload[] = [
     kind: "director-image",
     label: "Photo de la directrice",
     accept: "image/*",
-    hint: "Image (WebP de préférence). Remplace définitivement l'ancienne photo.",
+    hint: "Téléversez une photo (WebP de préférence). Si l'image est trop lourde et que vous n'arrivez pas à créer ou modifier la photo, vous pouvez essayer de convertir votre image sur un site comme https://squoosh.app/.",
   },
   {
     kind: "frais-pdf",

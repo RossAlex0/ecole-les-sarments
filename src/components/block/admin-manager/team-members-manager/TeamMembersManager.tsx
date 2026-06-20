@@ -1,6 +1,6 @@
 "use client";
 
-import ResourceManager from "@/components/block/resource-manager/ResourceManager";
+import ResourceManager from "@/components/block/admin-manager/resource-manager/ResourceManager";
 import { TEAM_FIELDS } from "@/utils/form/resourceConfigs";
 import { useCreateTeamMember } from "@/utils/hooks/team-members/useCreateTeamMember";
 import { useUpdateTeamMember } from "@/utils/hooks/team-members/useUpdateTeamMember";

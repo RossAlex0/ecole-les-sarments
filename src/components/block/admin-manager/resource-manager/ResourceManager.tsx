@@ -2,8 +2,8 @@
 
 import { useCallback, useMemo, useState } from "react";
 import useFetch from "@/utils/hooks/useFetch";
-import ResourceForm from "@/components/block/resource-form/ResourceForm";
-import ConfirmDialog from "@/components/block/confirm-dialog/ConfirmDialog";
+import ResourceForm from "@/components/block/admin-manager/resource-form/ResourceForm";
+import ConfirmDialog from "@/components/block/admin-manager/confirm-dialog/ConfirmDialog";
 import {
   type FieldDef,
   type FormValues,

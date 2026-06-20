@@ -3,8 +3,8 @@
 import { useCallback, useMemo, useState } from "react";
 import useFetch from "@/utils/hooks/useFetch";
 import type { Testimonials } from "@/utils/types/table";
-import ConfirmDialog from "@/components/block/confirm-dialog/ConfirmDialog";
-import ResourceForm from "@/components/block/resource-form/ResourceForm";
+import ConfirmDialog from "@/components/block/admin-manager/confirm-dialog/ConfirmDialog";
+import ResourceForm from "@/components/block/admin-manager/resource-form/ResourceForm";
 import { type FormValues, initialValues, valuesToPayload } from "@/utils/form/fields";
 import { TESTIMONIAL_FIELDS } from "@/utils/form/resourceConfigs";
 import { useAdminCreateTestimonial } from "@/utils/hooks/testimonials/useAdminCreateTestimonial";
