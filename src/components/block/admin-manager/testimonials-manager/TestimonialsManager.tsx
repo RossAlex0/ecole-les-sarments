@@ -5,6 +5,7 @@ import useFetch from "@/utils/hooks/useFetch";
 import type { Testimonials } from "@/utils/types/table";
 import ConfirmDialog from "@/components/block/admin-manager/confirm-dialog/ConfirmDialog";
 import ResourceForm from "@/components/block/admin-manager/resource-form/ResourceForm";
+import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
 import { type FormValues, initialValues, valuesToPayload } from "@/utils/form/fields";
 import { TESTIMONIAL_FIELDS } from "@/utils/form/resourceConfigs";
 import { useAdminCreateTestimonial } from "@/utils/hooks/testimonials/useAdminCreateTestimonial";
@@ -108,9 +109,8 @@ export default function TestimonialsManager() {
       <div className="admin_manager_head">
         <span className="admin_count">{all.length} témoignage(s)</span>
         {!creating && (
-          <button
-            type="button"
-            className="admin_btn admin_btn_primary"
+          <SarmentsButton
+            theme="primary"
             onClick={() => {
               setForm(emptyForm);
               setFormError(null);
@@ -118,7 +118,7 @@ export default function TestimonialsManager() {
             }}
           >
             Ajouter un témoignage
-          </button>
+          </SarmentsButton>
         )}
       </div>
 
@@ -178,23 +178,21 @@ export default function TestimonialsManager() {
 
             <div className="admin_row_actions">
               {!testimonial.is_published && (
-                <button
-                  type="button"
-                  className="admin_btn admin_btn_primary"
+                <SarmentsButton
+                  theme="primary"
                   onClick={() => publish(testimonial.id)}
                   disabled={busyId === testimonial.id}
                 >
                   {busyId === testimonial.id ? "…" : "Valider"}
-                </button>
+                </SarmentsButton>
               )}
-              <button
-                type="button"
-                className="admin_btn admin_btn_danger"
+              <SarmentsButton
+                theme="danger"
                 onClick={() => setToDelete(testimonial)}
                 disabled={busyId === testimonial.id}
               >
                 Supprimer
-              </button>
+              </SarmentsButton>
             </div>
           </li>
         ))}

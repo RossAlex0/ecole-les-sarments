@@ -1,6 +1,7 @@
 "use client";
 
 import Modal from "@/components/ui/modal/Modal";
+import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
 
 type ConfirmDialogProps = {
   open: boolean;
@@ -27,22 +28,12 @@ export default function ConfirmDialog({
         <h2 className="admin_confirm_title">{title}</h2>
         <p className="admin_confirm_message">{message}</p>
         <div className="admin_confirm_actions">
-          <button
-            type="button"
-            className="admin_btn admin_btn_ghost"
-            onClick={onCancel}
-            disabled={busy}
-          >
+          <SarmentsButton theme="ghost" onClick={onCancel} disabled={busy}>
             Annuler
-          </button>
-          <button
-            type="button"
-            className="admin_btn admin_btn_danger"
-            onClick={onConfirm}
-            disabled={busy}
-          >
+          </SarmentsButton>
+          <SarmentsButton theme="danger" onClick={onConfirm} disabled={busy}>
             {busy ? "Suppression…" : confirmLabel}
-          </button>
+          </SarmentsButton>
         </div>
       </div>
     </Modal>

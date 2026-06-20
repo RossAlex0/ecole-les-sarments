@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { useUploadFile, type UploadKind } from "@/utils/hooks/files/useUploadFile";
+import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
 
 type Upload = {
   kind: UploadKind;
@@ -72,9 +73,9 @@ function UploadCard({ kind, label, accept, hint }: Upload) {
       {error && <p className="admin_error">{error}</p>}
       {status && <p className="admin_success">{status}</p>}
       <div className="admin_form_actions">
-        <button type="submit" className="admin_btn admin_btn_primary" disabled={busy}>
+        <SarmentsButton theme="primary" type="submit" disabled={busy}>
           {busy ? "Envoi…" : "Mettre à jour"}
-        </button>
+        </SarmentsButton>
       </div>
     </form>
   );
