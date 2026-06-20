@@ -1,3 +1,5 @@
-import { EventController } from "../../../../server/controller/event.controller";
+import { EventController } from "@/server/controller/event.controller";
+import { publicRoute } from "@/server/http/route";
 
-export const GET = EventController.getNextEvent;
+// Public: the next upcoming highlighted event.
+export const GET = publicRoute(EventController.getNextEvent);

@@ -1,3 +1,5 @@
-import { TeamMemberController } from "../../../server/controller/teamMember.controller";
+import { TeamMemberController } from "@/server/controller/teamMember.controller";
+import { publicRoute } from "@/server/http/route";
 
-export const GET = TeamMemberController.getAllTeamMembers;
+// Public: published team members.
+export const GET = publicRoute(TeamMemberController.getPublished);

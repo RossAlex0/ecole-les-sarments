@@ -6,12 +6,14 @@ import VideoSection from "@/components/layout/video-section/VideoSection";
 
 export default function Home() {
   return (
-    <main>
-      <Hero />
-      <CitationBanner />
-      <VideoSection />
-      <Stat />
-      <HomeFooter />
-    </main>
+    <>
+      <main>
+        <Hero />
+        <CitationBanner />
+        <VideoSection />
+        <Stat />
+        <HomeFooter />
+      </main>
+    </>
   );
 }

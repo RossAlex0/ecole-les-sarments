@@ -1,9 +1,9 @@
 import { FaBus, FaTrain, FaCar, FaSquareParking } from "react-icons/fa6";
 import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 import Separator from "@/components/ui/separator/Separator";
-import "./contact.css";
 import CardInfo from "@/components/block/card-info/CardInfo";
 import { contactMailto } from "@/utils/contact/contact";
+import "./contact.css";
 
 export default function ContactPage() {
   return (
