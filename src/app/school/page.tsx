@@ -84,15 +84,21 @@ export default async function SchoolPage() {
           </SarmentsText>
           <div>
             <SarmentsText format="text">Frais de scolarité</SarmentsText>
-            {/* TODO - ajouter les link vers les fichiers */}
-            <Link href={"/"} className="school_footer_info_text">
+            <Link
+              href={storageUrl("ecole-les-sarments/doc/tarifs-inscriptions-ecole-les-sarments.pdf")}
+              target="_blank"
+              className="school_footer_info_text"
+            >
               Télécharger
             </Link>
           </div>
           <div id="informations">
             <SarmentsText format="text">Uniformes scolaires</SarmentsText>
-            {/* TODO - ajouter les link vers les fichiers */}
-            <Link href={"/"} className="school_footer_info_text">
+            <Link
+              href={storageUrl("ecole-les-sarments/doc/uniformes.pdf")}
+              target="_blank"
+              className="school_footer_info_text"
+            >
               Télécharger
             </Link>
           </div>
