@@ -1,10 +1,10 @@
 import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 import Link from "next/link";
-import "./studentLife.css";
 import { FaFacebookF, FaInstagram } from "react-icons/fa6";
 import NextEvent from "@/components/layout/event/next-event/NextEvent";
 import EventsList from "@/components/layout/event/event-list/EventList";
 import { getCachedNextEvent, getCachedUpcomingNews } from "@/server/service/event/event.cache";
+import "./studentLife.css";
 
 const socials = [
   {

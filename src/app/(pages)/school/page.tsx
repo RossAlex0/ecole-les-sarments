@@ -6,12 +6,12 @@ import SchoolTeam from "@/components/layout/school/school-team/SchoolTeam";
 import Timeline from "@/components/ui/timeline/Timeline";
 import { schoolUtilsData } from "@/components/layout/school/schoolUtilsData";
 import Link from "next/link";
-import "./school.css";
 import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
 import SchoolTestimonials from "@/components/layout/school/school-testimonials/SchoolTestimonials";
 import { getCachedTeamMembers } from "@/server/service/team-member/teamMember.cache";
 import { getCachedTestimonials } from "@/server/service/testimonial/testimonial.cache";
-import { storageUrl } from "@/lib/supabase/storage";
+import { publicFileUrl, STORAGE_PATHS } from "@/lib/supabase/storage";
+import "./school.css";
 
 export default async function SchoolPage() {
   const [team, testimonials] = await Promise.all([getCachedTeamMembers(), getCachedTestimonials()]);
@@ -24,7 +24,7 @@ export default async function SchoolPage() {
       <div className="school_director">
         <div className="school_director_image">
           <Image
-            src={storageUrl("ecole-les-sarments/team/direcfrice.webp")}
+            src={publicFileUrl(STORAGE_PATHS.directorImage)}
             alt="Armelle Da Rocha, directrice de l'école"
             fill
             sizes="(max-width: 768px) 100vw, 380px"
@@ -85,7 +85,7 @@ export default async function SchoolPage() {
           <div>
             <SarmentsText format="text">Frais de scolarité</SarmentsText>
             <Link
-              href={storageUrl("ecole-les-sarments/doc/tarifs-inscriptions-ecole-les-sarments.pdf")}
+              href={publicFileUrl(STORAGE_PATHS.fraisPdf)}
               target="_blank"
               className="school_footer_info_text"
             >
@@ -95,7 +95,7 @@ export default async function SchoolPage() {
           <div id="informations">
             <SarmentsText format="text">Uniformes scolaires</SarmentsText>
             <Link
-              href={storageUrl("ecole-les-sarments/doc/uniformes.pdf")}
+              href={publicFileUrl(STORAGE_PATHS.uniformesPdf)}
               target="_blank"
               className="school_footer_info_text"
             >

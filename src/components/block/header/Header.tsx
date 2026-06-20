@@ -17,8 +17,8 @@ export default function Header() {
       <Link href="/" aria-label="Accueil — École Les Sarments">
         <Image
           src="/logo/light-logo-text.svg"
-          height={60}
-          width={200}
+          height={80}
+          width={210}
           alt="École Les Sarments, école à Toulouse"
           loading="eager"
         />

@@ -6,7 +6,7 @@ import "./teachingApproach.css";
 
 export default function TeachingApproachePage() {
   return (
-    <section style={{ paddingTop: "14vh" }}>
+    <section style={{ paddingTop: "10vh" }}>
       <div className="hero_teaching">
         <CardInfo
           text="Transmettre l’excellence et former chaque enfant dans toutes ses dimensions intellectuelles et humaines : telle est la vocation des Sarments où chaque élève découvre, s’épanouit et rayonne."
