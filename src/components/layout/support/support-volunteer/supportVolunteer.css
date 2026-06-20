@@ -1,0 +1,35 @@
+.support_volunteer {
+  width: 100%;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.support_volunteer_banner {
+  width: 100%;
+  max-width: 1200px;
+  background-color: var(--gold-color);
+  border-radius: 16px;
+  padding: 2.75rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.support_volunteer_text {
+  max-width: 820px;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .support_volunteer {
+    padding: 1.5rem 1rem;
+  }
+
+  .support_volunteer_banner {
+    padding: 2rem 1.5rem;
+  }
+}

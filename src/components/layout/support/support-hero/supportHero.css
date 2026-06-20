@@ -1,0 +1,22 @@
+.support_hero {
+  width: 100%;
+  max-width: 900px;
+  margin-inline: auto;
+  padding: 2rem 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+.support_hero_lead {
+  max-width: 760px;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .support_hero {
+    padding: 1rem 1rem 0.5rem;
+  }
+}
