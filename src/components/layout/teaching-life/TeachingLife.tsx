@@ -6,6 +6,7 @@ import School from "./school/School";
 import PreSchool from "./pre-school/PreSchool";
 import "./teachingLife.css";
 import CardInfo from "@/components/block/card-info/CardInfo";
+import { HELLOASSO_URL } from "../support/supportLinks";
 
 export default function TeachingLife() {
   const [active, setActive] = useState(0);
@@ -22,6 +23,7 @@ export default function TeachingLife() {
         text="Participer à un projet ou parrainer un enfant"
         label="Parrainer un enfant"
         className="teaching_card"
+        href={HELLOASSO_URL}
       />
     </div>
   );

@@ -9,7 +9,11 @@ export default function HomeFooter() {
     <section className="home_footer">
       <div>{hasEvent ? <div></div> : undefined}</div>
       <div className="home_footer_card">
-        <CardInfo title="Soutenir l'école" text="Participer à un projet ou parrainer un enfant" />
+        <CardInfo
+          title="Soutenir l'école"
+          text="Participer à un projet ou parrainer un enfant"
+          href="/support-us"
+        />
       </div>
     </section>
   );
