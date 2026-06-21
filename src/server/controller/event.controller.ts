@@ -43,4 +43,15 @@ export const EventController = {
     revalidateTag(CacheTag.EVENTS, "max");
     return { success: true };
   },
+
+  // Cron: remove events that started more than 10 months ago (+ their images).
+  cleanupOld: async () => {
+    const cutoff = new Date();
+    cutoff.setMonth(cutoff.getMonth() - 10);
+
+    const { deleted, error } = await new EventService().removeStartedBefore(cutoff.toISOString());
+    if (error) throw error;
+    if (deleted > 0) revalidateTag(CacheTag.EVENTS, "max");
+    return { deleted };
+  },
 };

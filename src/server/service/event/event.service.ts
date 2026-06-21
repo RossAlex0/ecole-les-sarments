@@ -90,4 +90,36 @@ export class EventService {
 
     return await supabaseAdmin.from(SupabaseTable.EVENTS).delete().eq("id", id);
   }
+
+  /**
+   * Cron cleanup: delete events that started before `beforeIso`, along with
+   * their storage images. Returns the number of deleted rows.
+   */
+  async removeStartedBefore(beforeIso: string) {
+    const { data: stale, error: selectError } = await supabaseAdmin
+      .from(SupabaseTable.EVENTS)
+      .select("id, image_url")
+      .lt("start_at", beforeIso);
+
+    if (selectError) return { deleted: 0, error: selectError };
+
+    const rows = stale ?? [];
+    if (rows.length === 0) return { deleted: 0, error: null };
+
+    // Best-effort: remove associated images from storage.
+    const paths = rows
+      .map((row) => (row.image_url ? bucketPathFromUrl(row.image_url) : null))
+      .filter((path): path is string => Boolean(path));
+    if (paths.length > 0) await supabaseAdmin.storage.from(STORAGE_BUCKET).remove(paths);
+
+    const { error: deleteError } = await supabaseAdmin
+      .from(SupabaseTable.EVENTS)
+      .delete()
+      .in(
+        "id",
+        rows.map((row) => row.id),
+      );
+
+    return { deleted: deleteError ? 0 : rows.length, error: deleteError };
+  }
 }
