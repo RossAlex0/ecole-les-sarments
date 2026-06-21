@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { HttpError } from "./httpError";
 import { requireAdmin } from "../auth/requireAdmin";
+import { requireCron } from "../auth/requireCron";
 import { checkRateLimit } from "./rateLimit";
 
 export type RouteContext = { params: Promise<Record<string, string>> };
@@ -40,6 +41,15 @@ export function adminRoute(handler: RouteHandler) {
   return (request: Request, context: RouteContext) =>
     execute(request, async () => {
       await requireAdmin();
+      return handler(request, context);
+    });
+}
+
+/** Cron route: rate limit, requires the Vercel CRON_SECRET, then JSON + error handling. */
+export function cronRoute(handler: RouteHandler) {
+  return (request: Request, context: RouteContext) =>
+    execute(request, async () => {
+      requireCron(request);
       return handler(request, context);
     });
 }
