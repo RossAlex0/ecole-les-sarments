@@ -13,6 +13,8 @@ const ROUTES: {
   { path: "/student-life", priority: 0.7, changeFrequency: "weekly" },
   { path: "/support-us", priority: 0.6, changeFrequency: "yearly" },
   { path: "/contact", priority: 0.6, changeFrequency: "yearly" },
+  { path: "/legal-notice", priority: 0.2, changeFrequency: "yearly" },
+  { path: "/privacy-policy", priority: 0.2, changeFrequency: "yearly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
