@@ -6,6 +6,8 @@ import {
   getCachedNextEvent,
 } from "../service/event/event.cache";
 import { CacheTag } from "../cache/tags";
+import { parseBody } from "../http/validate";
+import { eventCreateSchema, eventUpdateSchema } from "../validation/event.schema";
 import type { RouteContext } from "../http/route";
 
 export const EventController = {
@@ -18,7 +20,7 @@ export const EventController = {
   getAll: () => new EventService().getAll(),
 
   create: async (request: Request) => {
-    const body = await request.json();
+    const body = await parseBody(request, eventCreateSchema);
     const { data, error } = await new EventService().create(body);
     if (error) throw error;
     revalidateTag(CacheTag.EVENTS, "max");
@@ -27,7 +29,7 @@ export const EventController = {
 
   update: async (request: Request, context: RouteContext) => {
     const { id } = await context.params;
-    const body = await request.json();
+    const body = await parseBody(request, eventUpdateSchema);
     const { data, error } = await new EventService().update(id, body);
     if (error) throw error;
     revalidateTag(CacheTag.EVENTS, "max");
