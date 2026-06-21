@@ -158,7 +158,7 @@
   .school_director {
     grid-template-columns: 1fr;
     gap: 2rem;
-    padding: 2rem 1rem;
+    padding: 2rem 0;
     text-align: center;
   }
 
@@ -186,5 +186,15 @@
   }
   .parents_hero_card {
     padding: 2rem 1.25rem;
+  }
+}
+@media (max-width: 480px) {
+  .parents_hero_card > h2 {
+    font-size: 28px;
+  }
+
+  .school_footer_info > h2 {
+    font-size: 28px;
+    text-align: center;
   }
 }

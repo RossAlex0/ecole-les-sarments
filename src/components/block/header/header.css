@@ -39,3 +39,173 @@
 .header_nav_link.active {
   color: var(--gold-color);
 }
+
+/* --- Mobile burger (hidden on desktop) --- */
+.header_burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  background: transparent;
+  border: none;
+  color: var(--white-color);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.header_burger:hover {
+  color: var(--gold-color);
+}
+
+/* --- Mobile bottom sheet --- */
+.mobile_nav_overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(11, 41, 71, 0.55);
+  backdrop-filter: blur(6px);
+  animation: mobile_nav_overlay_in 0.2s ease;
+}
+
+.mobile_nav_sheet {
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: var(--blue-color);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 0.75rem 1.5rem 2.5rem;
+  box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.4);
+  animation: mobile_nav_sheet_in 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mobile_nav_topbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0 1rem;
+}
+
+.mobile_nav_handle {
+  width: 40px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.mobile_nav_close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--white-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.mobile_nav_close:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mobile_nav_list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mobile_nav_item {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile_nav_link {
+  display: block;
+  padding: 1rem 0.5rem;
+  color: var(--white-color);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: color 0.2s ease;
+}
+
+.mobile_nav_link:hover,
+.mobile_nav_link.active {
+  color: var(--gold-color);
+}
+
+/* Full-width "Nous soutenir" CTA pinned at the bottom of the sheet */
+.mobile_nav_item:last-child {
+  margin-top: 1.5rem;
+}
+
+.mobile_nav_item:last-child a {
+  display: block;
+}
+
+.mobile_nav_item:last-child .button_custom {
+  width: 100%;
+  text-align: center;
+  padding-block: 0.7rem;
+}
+
+@keyframes mobile_nav_overlay_in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mobile_nav_sheet_in {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* --- Breakpoints --- */
+@media (max-width: 1024px) {
+  .header_nav {
+    display: none;
+  }
+
+  .header_burger {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .header_logo {
+    height: 56px;
+    width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.5rem 1rem;
+  }
+
+  .header_logo {
+    height: 48px;
+    width: auto;
+  }
+}

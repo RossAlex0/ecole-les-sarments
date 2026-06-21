@@ -3,7 +3,7 @@
   justify-content: center;
   gap: 5rem;
   min-height: 10vh;
-  padding: 2rem;
+  padding: 4rem 2rem;
 }
 
 .first_quote {
@@ -23,4 +23,46 @@
 .citation_banner_title_desc {
   margin-top: 0.5rem;
   text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .citation_banner {
+    gap: 2rem;
+    padding: 3rem 1.5rem;
+  }
+
+  .citation_banner_title {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .citation_banner {
+    gap: 1rem;
+  }
+
+  /* Decorative quotes take too much room on phones */
+  .first_quote,
+  .last_quote {
+    display: none;
+  }
+
+  .citation_banner_title {
+    max-width: 100%;
+  }
+
+  .citation_banner .custom_text_fat-title {
+    font-size: 28px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .citation_banner {
+    padding: 2.5rem 1rem;
+  }
+
+  .citation_banner .custom_text_fat-title {
+    font-size: 24px;
+  }
 }

@@ -11,3 +11,25 @@
   width: 50%;
   text-align: center;
 }
+
+@media (max-width: 1024px) {
+  .teaching_card {
+    width: 75%;
+  }
+}
+
+@media (max-width: 768px) {
+  .teaching_card {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .teaching_card {
+    width: 90%;
+  }
+  .teaching_card h2 {
+    font-size: 30px;
+    margin-bottom: 6px;
+  }
+}

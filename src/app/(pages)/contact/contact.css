@@ -121,7 +121,7 @@
 
   .contact_access_item {
     justify-content: flex-start;
-    flex-direction: row-reverse;
+    flex-direction: row;
   }
 
   .contact_map {

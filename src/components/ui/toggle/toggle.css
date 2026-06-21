@@ -36,3 +36,15 @@
 .custom_toggle_option_active {
   color: var(--blue-color);
 }
+
+@media (max-width: 480px) {
+  .custom_toggle {
+    max-width: 100%;
+  }
+
+  .custom_toggle_option {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.78rem;
+    white-space: normal;
+  }
+}

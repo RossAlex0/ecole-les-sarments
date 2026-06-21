@@ -6,6 +6,7 @@ import type { Testimonials } from "@/utils/types/table";
 import ConfirmDialog from "@/components/block/admin-manager/confirm-dialog/ConfirmDialog";
 import ResourceForm from "@/components/block/admin-manager/resource-form/ResourceForm";
 import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
+import { RiCheckLine, RiDeleteBin6Line } from "react-icons/ri";
 import { type FormValues, initialValues, valuesToPayload } from "@/utils/form/fields";
 import { TESTIMONIAL_FIELDS } from "@/utils/form/resourceConfigs";
 import { useAdminCreateTestimonial } from "@/utils/hooks/testimonials/useAdminCreateTestimonial";
@@ -180,18 +181,30 @@ export default function TestimonialsManager() {
               {!testimonial.is_published && (
                 <SarmentsButton
                   theme="primary"
+                  className="admin_action_btn"
+                  aria-label="Valider"
                   onClick={() => publish(testimonial.id)}
                   disabled={busyId === testimonial.id}
                 >
-                  {busyId === testimonial.id ? "…" : "Valider"}
+                  {busyId === testimonial.id ? (
+                    "…"
+                  ) : (
+                    <>
+                      <RiCheckLine className="admin_action_icon" aria-hidden="true" />
+                      <span className="admin_action_label">Valider</span>
+                    </>
+                  )}
                 </SarmentsButton>
               )}
               <SarmentsButton
                 theme="danger"
+                className="admin_action_btn"
+                aria-label="Supprimer"
                 onClick={() => setToDelete(testimonial)}
                 disabled={busyId === testimonial.id}
               >
-                Supprimer
+                <RiDeleteBin6Line className="admin_action_icon" aria-hidden="true" />
+                <span className="admin_action_label">Supprimer</span>
               </SarmentsButton>
             </div>
           </li>

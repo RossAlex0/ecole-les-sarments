@@ -36,3 +36,35 @@
 .advantage_content_card:hover {
   transform: scale(1.04);
 }
+
+@media (max-width: 1024px) {
+  .advantage_content {
+    width: 92%;
+  }
+}
+
+@media (max-width: 768px) {
+  .advantage {
+    padding: 2rem 1.25rem;
+  }
+
+  .advantage_content {
+    width: 100%;
+  }
+
+  /* One advantage card per row on phones */
+  .advantage_content_card {
+    width: 100%;
+  }
+
+  .advantage .custom_text_fat-title {
+    font-size: 28px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .advantage .custom_text_fat-title {
+    font-size: 24px;
+  }
+}

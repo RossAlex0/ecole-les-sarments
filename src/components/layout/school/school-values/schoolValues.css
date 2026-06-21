@@ -58,7 +58,7 @@
 @media (max-width: 1024px) {
   .school_values {
     padding: 2.5rem 1.5rem;
-    margin: 0 1rem;
+    margin: 0 0;
   }
 
   .school_values_list {
@@ -100,5 +100,9 @@
 
   .school_values_icon {
     font-size: 2.25rem;
+  }
+
+  .school_values_container > h2 {
+    font-size: 28px;
   }
 }

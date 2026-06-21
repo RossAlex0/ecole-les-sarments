@@ -5,6 +5,7 @@ import useFetch from "@/utils/hooks/useFetch";
 import ResourceForm from "@/components/block/admin-manager/resource-form/ResourceForm";
 import ConfirmDialog from "@/components/block/admin-manager/confirm-dialog/ConfirmDialog";
 import SarmentsButton from "@/components/ui/sarmentsButton/SarmentsButton";
+import { RiDeleteBin6Line, RiPencilLine } from "react-icons/ri";
 import {
   type FieldDef,
   type FormValues,
@@ -189,11 +190,25 @@ export default function ResourceManager({
                   })()}
                 </span>
                 <div className="admin_row_actions">
-                  <SarmentsButton theme="ghost" onClick={() => startEdit(row)} disabled={busy}>
-                    Modifier
+                  <SarmentsButton
+                    theme="ghost"
+                    className="admin_action_btn"
+                    aria-label="Modifier"
+                    onClick={() => startEdit(row)}
+                    disabled={busy}
+                  >
+                    <RiPencilLine className="admin_action_icon" aria-hidden="true" />
+                    <span className="admin_action_label">Modifier</span>
                   </SarmentsButton>
-                  <SarmentsButton theme="danger" onClick={() => setToDelete(row)} disabled={busy}>
-                    Supprimer
+                  <SarmentsButton
+                    theme="danger"
+                    className="admin_action_btn"
+                    aria-label="Supprimer"
+                    onClick={() => setToDelete(row)}
+                    disabled={busy}
+                  >
+                    <RiDeleteBin6Line className="admin_action_icon" aria-hidden="true" />
+                    <span className="admin_action_label">Supprimer</span>
                   </SarmentsButton>
                 </div>
               </div>

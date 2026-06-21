@@ -12,28 +12,34 @@ export default function AdminLoginPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const onSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      setBusy(true);
-      setError(null);
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    console.info("ok");
+    if (email.length === 0 || password.length === 0) {
+      return;
+    }
 
-      const { error: authError } = await createBrowserSupabase().auth.signInWithPassword({
-        email,
-        password,
-      });
+    await login(e);
+  };
 
-      if (authError) {
-        setError("Identifiant ou mot de passe invalide.");
-        setBusy(false);
-        return;
-      }
+  const login = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setBusy(true);
+    setError(null);
 
-      router.push("/admin");
-      router.refresh();
-    },
-    [email, password, router],
-  );
+    const { error: authError } = await createBrowserSupabase().auth.signInWithPassword({
+      email,
+      password,
+    });
+    console.info("uinfo", authError);
+    if (authError) {
+      setError("Identifiant ou mot de passe invalide.");
+      setBusy(false);
+      return;
+    }
+
+    router.push("/admin");
+    router.refresh();
+  };
 
   return (
     <div className="admin_login">

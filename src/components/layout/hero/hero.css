@@ -14,3 +14,44 @@
   flex-direction: column;
   gap: 1.5rem;
 }
+
+@media (max-width: 1024px) {
+  .hero {
+    height: 85vh;
+    padding: 3rem;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 80vh;
+    min-height: 460px;
+    padding: 2rem 1.5rem;
+    align-items: flex-end;
+    background-position: 65% center;
+  }
+
+  .hero_text {
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .hero .custom_text_fat-title {
+    font-size: 30px;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Full-width tap targets on phones */
+  .hero_text .button_custom {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero .custom_text_fat-title {
+    font-size: 25px;
+  }
+}

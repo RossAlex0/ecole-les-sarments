@@ -25,3 +25,38 @@
 .school_base_midi {
   text-align: center;
 }
+
+@media (max-width: 1024px) {
+  .school_base > p {
+    padding-inline: 4rem;
+  }
+
+  .school_base_image {
+    height: auto;
+    aspect-ratio: 16 / 10;
+    margin-block: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .school_base > p {
+    padding-inline: 1.5rem;
+  }
+
+  .school_base_image {
+    aspect-ratio: 4 / 3;
+    margin-block: 2rem;
+  }
+
+  .school_base .custom_text_title {
+    font-size: 28px;
+    text-align: center;
+    padding-inline: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .school_base > p {
+    padding-inline: 1rem;
+  }
+}

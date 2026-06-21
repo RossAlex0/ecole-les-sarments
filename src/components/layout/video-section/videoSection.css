@@ -10,3 +10,16 @@
   height: 100%;
   width: 100%;
 }
+
+/* Below desktop, drop the fixed viewport height for a natural 16/9 video */
+@media (max-width: 1024px) {
+  .video_section {
+    height: auto;
+    gap: 2rem;
+  }
+
+  .video_section_frame {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+}

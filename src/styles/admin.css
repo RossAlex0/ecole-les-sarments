@@ -267,6 +267,18 @@
   gap: 0.5rem;
 }
 
+/* Row action buttons: text on desktop, icon-only on mobile. */
+.admin_action_btn p {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.admin_action_icon {
+  display: none;
+  font-size: 1.15rem;
+}
+
 .admin_empty {
   color: #5b6b7d;
   font-style: italic;
@@ -440,24 +452,70 @@
     flex-direction: column;
   }
 
+  /* Sidebar becomes a sticky top header */
   .admin_sidebar {
+    position: sticky;
+    top: 0;
     width: 100%;
-    flex: none;
     height: auto;
-    position: static;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.75rem;
+    justify-content: space-between;
+    gap: 0.6rem 1rem;
+    padding: 0.85rem 1.25rem;
   }
 
+  .admin_brand {
+    flex: 0 0 auto;
+  }
+
+  /* Nav drops to its own full-width row, scrollable horizontally */
   .admin_nav {
+    order: 3;
+    flex: 1 1 100%;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.25rem;
+  }
+
+  .admin_nav_link {
+    white-space: nowrap;
+  }
+
+  .admin_sidebar_foot {
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .admin_main {
     margin-left: 0;
     padding: 1.5rem;
+  }
+
+  /* Icon-only action buttons */
+  .admin_action_label {
+    display: none;
+  }
+
+  .admin_action_icon {
+    display: inline-flex;
+  }
+
+  .admin_action_btn {
+    padding-inline: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin_sidebar {
+    padding: 0.75rem 1rem;
+  }
+
+  .admin_main {
+    padding: 1.25rem 1rem;
   }
 }
