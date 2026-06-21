@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
+import { SITE_NAME, SITE_URL } from "@/utils/site";
 import "../styles/globals.css";
 
 const outfit = Outfit({
@@ -8,20 +9,12 @@ const outfit = Outfit({
   display: "swap",
 });
 
-// Production URL: custom domain (env) → Vercel production domain → localhost (dev).
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000");
-
-const SITE_NAME = "École Les Sarments";
 const TITLE = "École Les Sarments — école maternelle & primaire libre à Toulouse";
 const DESCRIPTION =
   "École Les Sarments : école hors contrat maternelle et primaire à Toulouse. Effectifs réduits, excellence et bienveillance pour l'épanouissement de chaque enfant.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: TITLE,
     template: `%s · ${SITE_NAME}`,
