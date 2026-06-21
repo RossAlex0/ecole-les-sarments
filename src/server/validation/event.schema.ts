@@ -6,7 +6,10 @@ const slug = z
   .trim()
   .min(1)
   .max(160)
-  .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug invalide : minuscules, chiffres et tirets uniquement.");
+  .regex(
+    /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+    "Slug invalide : minuscules, chiffres et tirets uniquement.",
+  );
 
 export const eventCreateSchema = z.object({
   title: text(160),
