@@ -28,14 +28,21 @@
   border: 1px solid var(--white-color);
 }
 
-.button_custom:hover {
+.light_btn:hover {
   background-color: var(--hover-gold-button);
   transform: translateY(-1.5px);
+}
+
+.dark_btn:hover {
+  background-color: var(--hover-gold-button);
+  transform: translateY(-1.5px);
+  border: 1px solid var(--white-color);
 }
 
 /* Keep the transparent theme transparent on hover (overrides the generic gold hover) */
 .transparent_btn:hover {
   background-color: rgba(0, 0, 0, 0.567);
+  transform: translateY(-1.5px);
 }
 
 /* Admin variants — rectangular action buttons used in the back office */

@@ -23,7 +23,7 @@ export default async function StudentLifePage() {
   const [nextEvent, news] = await Promise.all([getCachedNextEvent(), getCachedUpcomingNews()]);
 
   return (
-    <section style={{ paddingTop: "14vh" }}>
+    <section style={{ paddingTop: "10vh" }}>
       {nextEvent && <NextEvent event={nextEvent} />}
       {news.length > 0 && <EventsList events={news} />}
       <section className="follow_us">
