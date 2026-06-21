@@ -40,7 +40,7 @@ Priorités qui arbitrent **chaque** décision technique, dans cet ordre :
 
 Flux : `app/api/<resource>/route.ts` (wrapper) → `server/controller/*.controller.ts` (pur) → `server/service/<resource>/*.service.ts` (Supabase).
 
-- **Route** (`route.ts`) — composée via `publicRoute(handler)` / `adminRoute(handler)` (`server/http/route.ts`) : applique l'auth (admin) + la sérialisation JSON & erreurs. **Aucune logique métier.**
+- **Route** (`route.ts`) — composée via `publicRoute(handler)` / `adminRoute(handler)` / `cronRoute(handler)` (`server/http/route.ts`) : applique le rate limit + l'auth (admin / cron) + la sérialisation JSON & erreurs. **Aucune logique métier.**
 - **Controller** — **pur** : parse la requête, appelle le service, renvoie la data (`throw` sur erreur, capté par le wrapper). Pas d'auth, pas de try/catch HTTP.
 - **Service** — accès Supabase uniquement.
 
@@ -48,17 +48,30 @@ Flux : `app/api/<resource>/route.ts` (wrapper) → `server/controller/*.controll
 
 - **Public** (sans auth) : `/api/<resource>` — GET des publiés (+ POST public si applicable).
 - **Admin** (`requireAdmin`) : `/api/<resource>/admin` (GET tous + POST), `/api/<resource>/admin/[id]` (PATCH/DELETE).
+- **Cron** (`requireCron`) : `/api/cron/<job>` — déclenché par **Vercel Cron**, protégé par `CRON_SECRET` (`Authorization: Bearer`), **fail-closed**.
 - **Jamais** de `requireAdmin` « en place » sur une route potentiellement publique.
+
+**Sécurité transverse (toutes routes API) :**
+
+- **Rate limit** : limiter in-memory par IP (`server/http/rateLimit.ts`), appliqué dans `execute()` → couvre `publicRoute`/`adminRoute`/`cronRoute`. In-memory choisi pour le free tier (pas de SaaS) ; à migrer vers un store partagé (Upstash) + le middleware si un comptage global exact devient nécessaire.
+- **Validation des bodies** : **Zod** via `parseBody(request, schema)` (`server/http/validate.ts`) ; schémas par ressource dans `server/validation/`. Zod strippe les clés inconnues → anti mass-assignment. Trim + bornes de longueur obligatoires.
+
+**Cron (Vercel) :**
+
+- Planifié dans `vercel.json` (clé `crons`). Plan **Hobby/gratuit** : ≤ 1×/jour, 2 crons max.
+- Job actuel : `/api/cron/cleanup-events` (`0 3 */6 * *`) → supprime les events dont `start_at` > 10 mois + leurs images storage, puis `revalidateTag(EVENTS)`.
+- `CRON_SECRET` doit être défini sur Vercel (Production) ; sans lui l'endpoint renvoie 401.
 
 **Structure des dossiers :**
 
 - `src/app/` — pages (route group `(pages)` pour le public) + routes API
-- `src/server/` — `http/` (wrappers route + `HttpError`), `auth/` (`requireAdmin`), `controller/`, `service/<resource>/` (+ `.cache.ts`), `cache/tags.ts`
+- `src/server/` — `http/` (wrappers route + `HttpError` + `rateLimit` + `validate`), `auth/` (`requireAdmin`, `requireCron`), `controller/`, `service/<resource>/` (+ `.cache.ts`), `validation/<resource>.schema.ts` (Zod), `cache/tags.ts`
 - `src/components/` — `ui/` (atomiques) · `layout/` (sections) · `block/` (blocs composés). Dossier **kebab-case** + `PascalCase.tsx` + `lowercase.css` co-localisé ; classes CSS **snake_case** préfixées du composant.
 - `src/utils/` — `form/`, `hooks/<resource>/`, `http/`, `types/`, `date/`, `navigation/`…
 - `src/lib/supabase/` — `client.ts` (anon), `admin.ts` (service role), `server.ts` / `browser.ts` (SSR auth), `storage.ts`, `database.types.ts`
 - `src/styles/` — CSS globaux + `admin.css`
 - `src/proxy.ts` — middleware Next 16 (protège `/admin`)
+- `vercel.json` — jobs **Vercel Cron** (clé `crons`)
 
 ## 🗃️ Données, cache & auth
 
