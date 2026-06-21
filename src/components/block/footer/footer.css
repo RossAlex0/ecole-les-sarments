@@ -64,10 +64,15 @@
 
 .margin6 {
   margin-left: 6px;
+  border: none;
 }
 
 .footer_bold {
   font-weight: bold;
+}
+
+.footer_gold_color {
+  color: var(--gold-color);
 }
 
 @media (max-width: 1170px) {
@@ -78,6 +83,10 @@
 
   .footer_main > div {
     width: 100%;
+  }
+
+  .footer_main > .separator {
+    height: 1px;
   }
 
   .footer_main > hr {

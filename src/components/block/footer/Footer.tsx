@@ -66,7 +66,7 @@ export default function Footer() {
           </div>
           <Image
             src={"/logo/logo-fondation-pour-ecole.svg"}
-            height={40}
+            height={45}
             width={100}
             alt="fondation pour l'école"
             className="margin6"
@@ -95,6 +95,22 @@ export default function Footer() {
         <Link href="/privacy-policy">
           <SarmentsText format="small">Politique de confidentialité</SarmentsText>
         </Link>
+        <span className="footer_legal_sep" aria-hidden="true">
+          ·
+        </span>
+        <a href="https://alex-rossignol.fr" target="_blank">
+          <SarmentsText format="small">
+            Developed by <span className="footer_gold_color">Alex Rossignol</span>
+          </SarmentsText>
+        </a>
+        <span className="footer_legal_sep" aria-hidden="true">
+          ·
+        </span>
+        <a href="https://www.ayraultmarlene.fr" target="_blank">
+          <SarmentsText format="small">
+            Designed by <span className="footer_gold_color">Marlene Ayrault</span>
+          </SarmentsText>
+        </a>
       </nav>
 
       <AdmissionModal open={admissionOpen} onClose={closeAdmission} />
