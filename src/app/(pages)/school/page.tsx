@@ -72,7 +72,7 @@ export default async function SchoolPage() {
         </div>
       </div>
       <div className="school_testimonial_container">
-        {testimonials.length > 0 && <SchoolTestimonials testimonials={testimonials} />}
+        <SchoolTestimonials testimonials={testimonials} />
       </div>
       <div className="school_footer">
         <div className="school_footer_timeline">

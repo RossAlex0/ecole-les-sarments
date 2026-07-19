@@ -1,0 +1,72 @@
+.testimonial_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 640px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.testimonial_form_intro {
+  margin-top: -0.5rem;
+  opacity: 0.8;
+}
+
+.testimonial_form_field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+  text-align: left;
+}
+
+.testimonial_form_label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--blue-color);
+}
+
+.testimonial_form_input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(11, 41, 71, 0.25);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--blue-color);
+  background-color: var(--white-color);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.testimonial_form_input::placeholder {
+  color: rgba(11, 41, 71, 0.45);
+}
+
+.testimonial_form_input:focus {
+  outline: none;
+  border-color: var(--gold-color);
+  box-shadow: 0 0 0 3px rgba(198, 144, 47, 0.2);
+}
+
+.testimonial_form_textarea {
+  resize: vertical;
+  min-height: 8rem;
+  line-height: 1.5;
+}
+
+.testimonial_form_error {
+  margin-top: -0.25rem;
+}
+
+.testimonial_form_done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 560px;
+  margin-inline: auto;
+  text-align: center;
+}
