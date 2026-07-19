@@ -18,9 +18,9 @@ export default function SchoolHero() {
         <SarmentsText format="fat-title">Notre école</SarmentsText>
         <SarmentsText format="view" className="school_hero_text">
           L&apos;école les Sarments de Toulouse a été créée en 2018. Elle est indépendante et
-          bénéficie choisit ses enseignants, ses programmes, ses activités à partir de ses propres
-          supports pédagogiques. Aconfessionnelle, elle transmet aux élèves les savoirs fondamentaux
-          en s&apos;appuyant sur notre héritage gréco-romain et judéo-chrétien. Le port de
+          choisit ses enseignants, ses programmes, ses activités à partir de ses propres supports
+          pédagogiques. Aconfessionnelle, elle transmet aux élèves les savoirs fondamentaux en
+          s&apos;appuyant sur notre héritage gréco-romain et judéo-chrétien. Le port de
           l&apos;uniforme, symbole de simplicité et d&apos;unité, favorise la cohésion de tous les
           élèves.
         </SarmentsText>

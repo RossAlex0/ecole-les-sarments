@@ -13,7 +13,7 @@ export default function Stat() {
         <Counter end={200} duration={3400}>
           Elèves accompagnés depuis l&apos;ouverture
         </Counter>
-        <Counter end={81} duration={2700}>
+        <Counter end={80} duration={2700}>
           Elèves en 2026
         </Counter>
         <Counter end={4} duration={1700}>
