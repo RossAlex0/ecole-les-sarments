@@ -7,8 +7,69 @@
 }
 
 .video_section_frame {
+  position: relative;
   height: 100%;
   width: 100%;
+}
+
+.video_section_frame iframe {
+  border: 0;
+}
+
+/* Poster shown before play — whole area is one clickable button */
+.video_section_poster {
+  position: relative;
+  display: block;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: var(--blue-color);
+}
+
+.video_section_thumbnail {
+  object-fit: cover;
+}
+
+/* Dark filter over the thumbnail */
+.video_section_poster::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: rgba(11, 41, 71, 0.55);
+  transition: background-color 0.2s ease;
+}
+
+.video_section_poster:hover::before {
+  background-color: rgba(11, 41, 71, 0.4);
+}
+
+/* Play pill — mirrors the gold light_btn style */
+.video_section_cta {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.75rem;
+  border-radius: 9999px;
+  background-color: var(--gold-color);
+  color: var(--white-color);
+  font-size: 1.15rem;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.video_section_poster:hover .video_section_cta {
+  background-color: var(--hover-gold-button);
+  transform: translate(-50%, calc(-50% - 1.5px));
 }
 
 /* Below desktop, drop the fixed viewport height for a natural 16/9 video */

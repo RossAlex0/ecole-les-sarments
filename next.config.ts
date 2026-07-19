@@ -36,6 +36,12 @@ const nextConfig: NextConfig = {
         hostname: "funnkywkqepwqnasuuxe.supabase.co",
         pathname: "/storage/v1/object/public/**",
       },
+      // YouTube video thumbnails (home video-section poster)
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+        pathname: "/vi/**",
+      },
     ],
   },
   async headers() {
