@@ -21,6 +21,8 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   applicationName: SITE_NAME,
+  publisher: "Vercel",
+  authors: [{ name: "Alex Rossignol", url: "https://www.alex-rossignol.fr/" }],
   category: "education",
   keywords: [
     "école",
