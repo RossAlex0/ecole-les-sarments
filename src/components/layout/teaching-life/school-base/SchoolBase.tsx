@@ -6,6 +6,7 @@ import Timeline, { TimelineProps } from "@/components/ui/timeline/Timeline";
 
 type SchoolBaseProps = {
   title: string;
+  desc: string;
   urlImage: string;
   horaire: string;
   morning: TimelineProps;
@@ -14,6 +15,7 @@ type SchoolBaseProps = {
 
 export default function SchoolBase({
   title,
+  desc,
   urlImage,
   horaire,
   morning,
@@ -22,13 +24,7 @@ export default function SchoolBase({
   return (
     <div className="school_base">
       <SarmentsText format="title">{title}</SarmentsText>
-      <SarmentsText format="text">
-        Aux Sarments, les enfants sont accompagnés dès 2 ans et demi dans leurs premiers
-        apprentissages, à travers des activités variées favorisant le langage, la concentration,
-        l’autonomie et la vie en groupe. Les découvertes se font progressivement, écriture, lecture,
-        mathématiques, et s’enrichissent par la musique, les arts, la motricité et les sciences,
-        dans un cadre bienveillant qui encourage le goût d’apprendre.
-      </SarmentsText>
+      <SarmentsText format="text">{desc}</SarmentsText>
       <div className="school_base_image">
         <Image
           src={urlImage}

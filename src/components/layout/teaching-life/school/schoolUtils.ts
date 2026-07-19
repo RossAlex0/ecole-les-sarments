@@ -55,7 +55,7 @@ export const schoolTimelineAfternoon: TimelineProps = {
     {
       id: "3",
       time: "14h30 – 15h",
-      description: "Histoire, géographie, sciences, anglais & arts visuels",
+      description: "Histoire, géographie, sciences, anglais ou arts visuels",
       badges: [{ label: "CE" }, { label: "CM" }],
       side: "right",
     },
