@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     default: TITLE,
     template: `%s · ${SITE_NAME}`,
   },
+  verification: {
+    google: "sFxpenuVFmO4zJ3mJdK32H3ltRT-AV0AylDm6_X1BaY",
+  },
   description: DESCRIPTION,
   applicationName: SITE_NAME,
   publisher: "Vercel",
