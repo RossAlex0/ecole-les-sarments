@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 import SchoolHero from "@/components/layout/school/school-hero/SchoolHero";
@@ -12,6 +13,13 @@ import { getCachedTeamMembers } from "@/server/service/team-member/teamMember.ca
 import { getCachedTestimonials } from "@/server/service/testimonial/testimonial.cache";
 import { publicFileUrl, STORAGE_PATHS } from "@/lib/supabase/storage";
 import "./school.css";
+
+export const metadata: Metadata = {
+  title: "Notre école",
+  description:
+    "École Les Sarments : école maternelle et primaire privée hors contrat à Toulouse. Découvrez notre équipe, nos valeurs et la vie de l'école.",
+  alternates: { canonical: "/school" },
+};
 
 export default async function SchoolPage() {
   const [team, testimonials] = await Promise.all([getCachedTeamMembers(), getCachedTestimonials()]);

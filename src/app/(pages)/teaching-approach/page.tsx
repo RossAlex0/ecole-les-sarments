@@ -1,8 +1,16 @@
+import type { Metadata } from "next";
 import CardInfo from "@/components/block/card-info/CardInfo";
 import Advantage from "@/components/layout/advantage/Advantage";
 import TeachingLife from "@/components/layout/teaching-life/TeachingLife";
 
 import "./teachingApproach.css";
+
+export const metadata: Metadata = {
+  title: "Notre approche pédagogique",
+  description:
+    "L'approche pédagogique de l'école Les Sarments à Toulouse : école privée hors contrat, effectifs réduits et transmission des savoirs fondamentaux dans l'exigence et la bienveillance.",
+  alternates: { canonical: "/teaching-approach" },
+};
 
 export default function TeachingApproachePage() {
   return (

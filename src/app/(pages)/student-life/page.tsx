@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram } from "react-icons/fa6";
@@ -5,6 +6,13 @@ import NextEvent from "@/components/layout/event/next-event/NextEvent";
 import EventsList from "@/components/layout/event/event-list/EventList";
 import { getCachedNextEvent, getCachedUpcomingNews } from "@/server/service/event/event.cache";
 import "./studentLife.css";
+
+export const metadata: Metadata = {
+  title: "La vie à l'école",
+  description:
+    "La vie à l'école Les Sarments, école privée hors contrat à Toulouse : événements, sorties et temps forts du quotidien de nos élèves de maternelle et primaire.",
+  alternates: { canonical: "/student-life" },
+};
 
 const socials = [
   {
@@ -24,6 +32,10 @@ export default async function StudentLifePage() {
 
   return (
     <section style={{ paddingTop: "10vh" }}>
+      {/* SEO/a11y heading — visually hidden, honest description of the page */}
+      <h1 className="visually_hidden">
+        La vie à l&apos;école Les Sarments, école privée hors contrat à Toulouse
+      </h1>
       {nextEvent && <NextEvent event={nextEvent} />}
       {news.length > 0 && <EventsList events={news} />}
       <section className="follow_us">

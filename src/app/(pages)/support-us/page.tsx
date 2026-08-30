@@ -9,9 +9,10 @@ import SupportTrust from "@/components/layout/support/support-trust/SupportTrust
 import { HELLOASSO_URL, PDF_LEGS_URL } from "@/components/layout/support/supportLinks";
 
 export const metadata: Metadata = {
-  title: "Soutenir l'école — École Les Sarments",
+  title: "Soutenir l'école",
   description:
     "Soutenez l'école Les Sarments à Toulouse : parrainage d'un enfant, dons défiscalisés (IFI, IS, IR), legs et bénévolat. Contribuez à un projet éducatif indépendant.",
+  alternates: { canonical: "/support-us" },
 };
 
 export default function SupportPage() {

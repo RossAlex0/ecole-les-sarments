@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { FaBus, FaTrain, FaCar, FaSquareParking } from "react-icons/fa6";
 import SarmentsText from "@/components/ui/sarmentsText/SarmentsText";
 import Separator from "@/components/ui/separator/Separator";
@@ -5,11 +6,18 @@ import CardInfo from "@/components/block/card-info/CardInfo";
 import { contactMailto } from "@/utils/contact/contact";
 import "./contact.css";
 
+export const metadata: Metadata = {
+  title: "Contact & accès",
+  description:
+    "Contacter et rejoindre l'école Les Sarments, école privée hors contrat à Toulouse : 20 avenue Didier Daurat, quartier Montaudran. Coordonnées, accès et horaires.",
+  alternates: { canonical: "/contact" },
+};
+
 export default function ContactPage() {
   return (
     <section className="contact">
       <div className="contact_location">
-        <SarmentsText format="title" className="contact_title">
+        <SarmentsText format="title" as="h1" className="contact_title">
           Où nous trouver ?
         </SarmentsText>
         <SarmentsText format="text" className="contact_intro">
