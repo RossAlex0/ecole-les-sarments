@@ -10,9 +10,9 @@ const EVENTS_CACHE_KEY = "events:v2";
 
 /**
  * Cached reads of events.
- * `getNext`/`getNews` depend on the current date: short `revalidate` (1h) so the
+ * `getNext` depends on the current date: short `revalidate` (1h) so the
  * "next event" stays accurate without re-querying Supabase on every visit.
- * `getAll` is regenerated via `expireTag(CacheTag.EVENTS)` from the admin.
+ * `getAll`/`getPublished` are regenerated via `expireTag(CacheTag.EVENTS)` from the admin.
  */
 export const getCachedEvents = unstable_cache(
   async () => {
@@ -32,16 +32,6 @@ export const getCachedPublishedEvents = unstable_cache(
   },
   [EVENTS_CACHE_KEY, "published"],
   { tags: [CacheTag.EVENTS], revalidate: false },
-);
-
-export const getCachedUpcomingNews = unstable_cache(
-  async () => {
-    const { data, error } = await new EventService().getNews();
-    if (error) throw error;
-    return data ?? [];
-  },
-  [EVENTS_CACHE_KEY, "news"],
-  { tags: [CacheTag.EVENTS], revalidate: 3600 },
 );
 
 export const getCachedNextEvent = unstable_cache(
