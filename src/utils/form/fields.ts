@@ -11,6 +11,9 @@ export type FieldDef = {
   folder?: string;
   /** For `image` fields: companion field name holding the in-bucket path. */
   pathField?: string;
+  /** For `image` fields: companion field names receiving the stored image's size. */
+  widthField?: string;
+  heightField?: string;
 };
 
 export type FormValues = Record<string, string | boolean>;

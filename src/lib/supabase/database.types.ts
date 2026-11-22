@@ -14,7 +14,9 @@ export type Database = {
           description: string;
           end_at: string | null;
           id: string;
+          image_height: number | null;
           image_url: string | null;
+          image_width: number | null;
           is_event: boolean;
           is_published: boolean | null;
           location: string | null;
@@ -29,7 +31,9 @@ export type Database = {
           description: string;
           end_at?: string | null;
           id?: string;
+          image_height?: number | null;
           image_url?: string | null;
+          image_width?: number | null;
           is_event?: boolean;
           is_published?: boolean | null;
           location?: string | null;
@@ -44,7 +48,9 @@ export type Database = {
           description?: string;
           end_at?: string | null;
           id?: string;
+          image_height?: number | null;
           image_url?: string | null;
+          image_width?: number | null;
           is_event?: boolean;
           is_published?: boolean | null;
           location?: string | null;

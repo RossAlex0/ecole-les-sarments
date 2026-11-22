@@ -28,6 +28,12 @@ export const optionalUrl = z.preprocess(
   z.url().max(2048).nullable(),
 );
 
+/** Optional positive integer (form values arrive as strings) → `null` when empty or absent. */
+export const optionalPositiveInt = z.preprocess(
+  (v) => (v === "" || v == null ? null : v),
+  z.coerce.number().int().positive().max(100_000).nullable(),
+);
+
 /** Required ISO-8601 datetime (e.g. produced by Date.toISOString()). */
 export const isoDate = z.iso.datetime();
 

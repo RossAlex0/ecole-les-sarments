@@ -74,13 +74,15 @@ export default function ResourceForm({
         const file = pendingFiles[field.name];
         if (field.type === "image" && file) {
           const existingPath = field.pathField ? String(values[field.pathField] ?? "") : "";
-          const { url, path } = await uploadImage(
+          const { url, path, width, height } = await uploadImage(
             field.folder ?? "uploads",
             file,
             existingPath || undefined,
           );
           finalValues[field.name] = url;
           if (field.pathField) finalValues[field.pathField] = path;
+          if (field.widthField) finalValues[field.widthField] = String(width);
+          if (field.heightField) finalValues[field.heightField] = String(height);
         }
       }
       await onSubmit(finalValues);

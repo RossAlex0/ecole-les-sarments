@@ -71,9 +71,13 @@ export const EVENT_FIELDS: FieldDef[] = [
     label: "Image",
     type: "image",
     folder: "event",
+    widthField: "image_width",
+    heightField: "image_height",
     required: true,
     hint: "Téléversez une photo (WebP de préférence). Si l'image est trop lourde et que vous n'arrivez pas à créer ou modifier la photo, vous pouvez essayer de convertir votre image sur un site comme https://squoosh.app/.",
   },
+  { name: "image_width", label: "", type: "hidden" },
+  { name: "image_height", label: "", type: "hidden" },
   {
     name: "is_event",
     label: "Événement",
