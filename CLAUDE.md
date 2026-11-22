@@ -59,7 +59,7 @@ Flux : `app/api/<resource>/route.ts` (wrapper) → `server/controller/*.controll
 **Cron (Vercel) :**
 
 - Planifié dans `vercel.json` (clé `crons`). Plan **Hobby/gratuit** : ≤ 1×/jour, 2 crons max.
-- Job actuel : `/api/cron/cleanup-events` (`0 3 */6 * *`) → supprime les events dont `start_at` > 10 mois + leurs images storage, puis `revalidateTag(EVENTS)`.
+- Job actuel : `/api/cron/cleanup-events` (`0 3 */6 * *`) → supprime les events dont `start_at` > 10 mois + leurs images storage, puis `expireTag(CacheTag.EVENTS)`.
 - `CRON_SECRET` doit être défini sur Vercel (Production) ; sans lui l'endpoint renvoie 401.
 
 **Structure des dossiers :**
@@ -80,7 +80,7 @@ Flux : `app/api/<resource>/route.ts` (wrapper) → `server/controller/*.controll
 - **Server Component** (pages publiques SEO) → service en direct via `getCached*` → HTML serveur **indexable**.
 - **Client Component** (admin, interactif) → `useFetch` → route → controller → service (loading/error gérés). Choisi pour un **meilleur contrôle du cache** lors des manips admin ; la data publique change rarement, donc un cache qui persiste une session est acceptable.
 
-**Cache** : natif Next (`unstable_cache` + tags), invalidation par `revalidateTag(tag, "max")` après mutation admin. **PAS de lib de cache client** (SWR / React Query).
+**Cache** : natif Next (`unstable_cache` + tags), invalidation **immédiate** par `expireTag(tag)` (`server/cache/tags.ts`, = `revalidateTag(tag, { expire: 0 })`) après mutation admin — pas `"max"`, qui sert encore l'ancienne donnée une fois (stale-while-revalidate). **PAS de lib de cache client** (SWR / React Query).
 
 **Accès Supabase :**
 

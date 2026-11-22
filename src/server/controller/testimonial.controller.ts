@@ -1,7 +1,6 @@
-import { revalidateTag } from "next/cache";
 import { TestimonialService } from "../service/testimonial/testimonial.service";
 import { getCachedTestimonials } from "../service/testimonial/testimonial.cache";
-import { CacheTag } from "../cache/tags";
+import { CacheTag, expireTag } from "../cache/tags";
 import { parseBody } from "../http/validate";
 import {
   testimonialAdminCreateSchema,
@@ -39,7 +38,7 @@ export const TestimonialController = {
       is_published: isPublished,
     });
     if (error) throw error;
-    if (isPublished) revalidateTag(CacheTag.TESTIMONIALS, "max");
+    if (isPublished) expireTag(CacheTag.TESTIMONIALS);
     return data;
   },
 
@@ -48,7 +47,7 @@ export const TestimonialController = {
     const body = await parseBody(request, testimonialUpdateSchema);
     const { data, error } = await new TestimonialService().update(id, body);
     if (error) throw error;
-    revalidateTag(CacheTag.TESTIMONIALS, "max");
+    expireTag(CacheTag.TESTIMONIALS);
     return data;
   },
 
@@ -56,7 +55,7 @@ export const TestimonialController = {
     const { id } = await context.params;
     const { error } = await new TestimonialService().remove(id);
     if (error) throw error;
-    revalidateTag(CacheTag.TESTIMONIALS, "max");
+    expireTag(CacheTag.TESTIMONIALS);
     return { success: true };
   },
 };
