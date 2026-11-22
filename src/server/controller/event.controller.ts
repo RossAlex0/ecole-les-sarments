@@ -1,11 +1,10 @@
-import { revalidateTag } from "next/cache";
 import { EventService } from "../service/event/event.service";
 import {
   getCachedPublishedEvents,
   getCachedUpcomingNews,
   getCachedNextEvent,
 } from "../service/event/event.cache";
-import { CacheTag } from "../cache/tags";
+import { CacheTag, expireTag } from "../cache/tags";
 import { parseBody } from "../http/validate";
 import { eventCreateSchema, eventUpdateSchema } from "../validation/event.schema";
 import type { RouteContext } from "../http/route";
@@ -23,7 +22,7 @@ export const EventController = {
     const body = await parseBody(request, eventCreateSchema);
     const { data, error } = await new EventService().create(body);
     if (error) throw error;
-    revalidateTag(CacheTag.EVENTS, "max");
+    expireTag(CacheTag.EVENTS);
     return data;
   },
 
@@ -32,7 +31,7 @@ export const EventController = {
     const body = await parseBody(request, eventUpdateSchema);
     const { data, error } = await new EventService().update(id, body);
     if (error) throw error;
-    revalidateTag(CacheTag.EVENTS, "max");
+    expireTag(CacheTag.EVENTS);
     return data;
   },
 
@@ -40,7 +39,7 @@ export const EventController = {
     const { id } = await context.params;
     const { error } = await new EventService().remove(id);
     if (error) throw error;
-    revalidateTag(CacheTag.EVENTS, "max");
+    expireTag(CacheTag.EVENTS);
     return { success: true };
   },
 
@@ -51,7 +50,7 @@ export const EventController = {
 
     const { deleted, error } = await new EventService().removeStartedBefore(cutoff.toISOString());
     if (error) throw error;
-    if (deleted > 0) revalidateTag(CacheTag.EVENTS, "max");
+    if (deleted > 0) expireTag(CacheTag.EVENTS);
     return { deleted };
   },
 };

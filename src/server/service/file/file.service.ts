@@ -1,5 +1,6 @@
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { STORAGE_BUCKET, STORAGE_PATHS, publicFileUrl } from "@/lib/supabase/storage";
+import { optimizeImage } from "./image.optimizer";
 
 export type FileKind = "director-image" | "frais-pdf" | "uniformes-pdf" | "ifi-pdf" | "legs-pdf";
 
@@ -26,9 +27,11 @@ export class FileService {
   }
 
   /**
-   * Uploads an arbitrary image into `folder`. When `existingPath` is provided,
-   * the file is overwritten at the same path (same public URL); otherwise a new
-   * stable path is generated. Returns both the public URL and the in-bucket path.
+   * Uploads an arbitrary image into `folder`, resized to fit the display box
+   * and converted to WebP. When `existingPath` is provided, the file is
+   * overwritten at the same path (same public URL); otherwise a new stable path
+   * is generated. Returns the public URL, the in-bucket path and the stored
+   * image's dimensions.
    */
   async uploadImage(folder: string, file: File, existingPath?: string) {
     if (!/^[a-z0-9_-]+$/.test(folder)) throw new Error("Dossier invalide");
@@ -37,13 +40,15 @@ export class FileService {
       existingPath && /^[a-z0-9/_.-]+$/.test(existingPath) ? existingPath : undefined;
     const path = safeExisting ?? `${folder}/${crypto.randomUUID()}`;
 
+    const { buffer, width, height } = await optimizeImage(file);
+
     const { error } = await supabaseAdmin.storage
       .from(STORAGE_BUCKET)
-      .upload(path, file, { upsert: true, contentType: file.type });
+      .upload(path, buffer, { upsert: true, contentType: "image/webp" });
     if (error) throw error;
 
     // Cache-busting query: when overwriting the same path, the public URL is
     // otherwise identical and the old (cached) image would keep showing.
-    return { url: `${publicFileUrl(path)}?v=${Date.now()}`, path };
+    return { url: `${publicFileUrl(path)}?v=${Date.now()}`, path, width, height };
   }
 }

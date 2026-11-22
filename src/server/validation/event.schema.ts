@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { isoDate, optionalIsoDate, optionalText, text, url } from "./common";
+import { isoDate, optionalIsoDate, optionalPositiveInt, optionalText, text, url } from "./common";
 
 const slug = z
   .string()
@@ -20,6 +20,8 @@ export const eventCreateSchema = z.object({
   end_at: optionalIsoDate,
   location: optionalText(200),
   image_url: url,
+  image_width: optionalPositiveInt,
+  image_height: optionalPositiveInt,
   is_event: z.boolean().optional(),
   is_published: z.boolean().optional(),
 });

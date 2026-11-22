@@ -16,6 +16,6 @@ export function useUploadImage() {
 
     const res = await fetch("/api/files/image", { method: "POST", body: formData });
     if (!res.ok) throw await parseError(res);
-    return res.json() as Promise<{ url: string; path: string }>;
+    return res.json() as Promise<{ url: string; path: string; width: number; height: number }>;
   }, []);
 }

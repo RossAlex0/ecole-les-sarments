@@ -5,7 +5,7 @@ import { CacheTag } from "../../cache/tags";
 /**
  * Cached read of testimonials.
  * `revalidate: false` → Supabase is queried only once, then served from cache.
- * The cache is regenerated via `revalidateTag(CacheTag.TESTIMONIALS)` from the admin.
+ * The cache is regenerated via `expireTag(CacheTag.TESTIMONIALS)` from the admin.
  */
 export const getCachedTestimonials = unstable_cache(
   async () => {

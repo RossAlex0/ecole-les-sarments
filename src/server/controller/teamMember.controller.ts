@@ -1,7 +1,6 @@
-import { revalidateTag } from "next/cache";
 import { TeamMemberService } from "../service/team-member/teamMember.service";
 import { getCachedTeamMembers } from "../service/team-member/teamMember.cache";
-import { CacheTag } from "../cache/tags";
+import { CacheTag, expireTag } from "../cache/tags";
 import { parseBody } from "../http/validate";
 import { teamMemberCreateSchema, teamMemberUpdateSchema } from "../validation/teamMember.schema";
 import type { RouteContext } from "../http/route";
@@ -17,7 +16,7 @@ export const TeamMemberController = {
     const body = await parseBody(request, teamMemberCreateSchema);
     const { data, error } = await new TeamMemberService().create(body);
     if (error) throw error;
-    revalidateTag(CacheTag.TEAM_MEMBERS, "max");
+    expireTag(CacheTag.TEAM_MEMBERS);
     return data;
   },
 
@@ -26,7 +25,7 @@ export const TeamMemberController = {
     const body = await parseBody(request, teamMemberUpdateSchema);
     const { data, error } = await new TeamMemberService().update(id, body);
     if (error) throw error;
-    revalidateTag(CacheTag.TEAM_MEMBERS, "max");
+    expireTag(CacheTag.TEAM_MEMBERS);
     return data;
   },
 
@@ -34,7 +33,7 @@ export const TeamMemberController = {
     const { id } = await context.params;
     const { error } = await new TeamMemberService().remove(id);
     if (error) throw error;
-    revalidateTag(CacheTag.TEAM_MEMBERS, "max");
+    expireTag(CacheTag.TEAM_MEMBERS);
     return { success: true };
   },
 };
