@@ -55,20 +55,22 @@
 }
 
 .next_event_image {
+  --_max_width: 1200px;
+  --_max_height: min(1300px, 85svh);
   position: relative;
   z-index: 1;
-  width: 100%;
-  max-width: 1200px;
+  /* Up to 1200px wide; a tall image (`--_ratio` = width / height, set once
+     loaded) gets a narrower width so its height stays under the max. */
+  width: min(100%, var(--_max_width), calc(var(--_max_height) * var(--_ratio, 100)));
   margin: 0 auto;
-  aspect-ratio: 16 / 7;
   border-radius: 12px;
   overflow: hidden;
 }
 
-@media (max-width: 1024px) {
-  .next_event_image {
-    aspect-ratio: 16 / 8;
-  }
+.next_event_image img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 @media (max-width: 768px) {
@@ -82,7 +84,6 @@
   }
 
   .next_event_image {
-    aspect-ratio: 16 / 9;
     border-radius: 8px;
   }
 
