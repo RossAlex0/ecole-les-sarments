@@ -1,9 +1,5 @@
 import { EventService } from "../service/event/event.service";
-import {
-  getCachedPublishedEvents,
-  getCachedUpcomingNews,
-  getCachedNextEvent,
-} from "../service/event/event.cache";
+import { getCachedPublishedEvents, getCachedNextEvent } from "../service/event/event.cache";
 import { CacheTag, expireTag } from "../cache/tags";
 import { parseBody } from "../http/validate";
 import { eventCreateSchema, eventUpdateSchema } from "../validation/event.schema";
@@ -12,7 +8,6 @@ import type { RouteContext } from "../http/route";
 export const EventController = {
   // Public (read through the Next cache)
   getPublished: async () => ({ data: await getCachedPublishedEvents() }),
-  getUpcomingNews: async () => ({ data: await getCachedUpcomingNews() }),
   getNextEvent: async () => ({ data: await getCachedNextEvent() }),
 
   // Admin

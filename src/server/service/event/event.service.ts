@@ -58,18 +58,6 @@ export class EventService {
       .maybeSingle();
   }
 
-  /** Public: published items that are not over yet (ongoing or upcoming). */
-  async getNews() {
-    const now = new Date().toISOString();
-
-    return await supabase
-      .from(SupabaseTable.EVENTS)
-      .select("*")
-      .eq("is_published", true)
-      .or(`start_at.gte.${now},end_at.gte.${now}`)
-      .order("start_at", { ascending: true });
-  }
-
   async create(data: TablesInsert<"events">) {
     return await supabaseAdmin.from(SupabaseTable.EVENTS).insert(data).select().single();
   }
