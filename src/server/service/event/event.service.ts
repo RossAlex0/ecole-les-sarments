@@ -22,20 +22,43 @@ export class EventService {
       .order("start_at", { ascending: false });
   }
 
+  /**
+   * Public: the event to highlight, by priority:
+   * 1. the most recently started event still running (`end_at` >= now);
+   * 2. otherwise the closest upcoming one;
+   * 3. otherwise the last started one, so the block is never empty.
+   * Events without `end_at` are considered over once started.
+   */
   async getNext() {
     const now = new Date().toISOString();
+    const publishedEvents = () =>
+      supabase
+        .from(SupabaseTable.EVENTS)
+        .select("*")
+        .eq("is_published", true)
+        .eq("is_event", true)
+        .limit(1);
 
-    return await supabase
-      .from(SupabaseTable.EVENTS)
-      .select("*")
-      .eq("is_published", true)
-      .eq("is_event", true)
-      .gte("start_at", now)
+    const ongoing = await publishedEvents()
+      .lte("start_at", now)
+      .gte("end_at", now)
+      .order("start_at", { ascending: false })
+      .maybeSingle();
+    if (ongoing.error || ongoing.data) return ongoing;
+
+    const upcoming = await publishedEvents()
+      .gt("start_at", now)
       .order("start_at", { ascending: true })
-      .limit(1)
-      .single();
+      .maybeSingle();
+    if (upcoming.error || upcoming.data) return upcoming;
+
+    return await publishedEvents()
+      .lte("start_at", now)
+      .order("start_at", { ascending: false })
+      .maybeSingle();
   }
 
+  /** Public: published items that are not over yet (ongoing or upcoming). */
   async getNews() {
     const now = new Date().toISOString();
 
@@ -43,7 +66,7 @@ export class EventService {
       .from(SupabaseTable.EVENTS)
       .select("*")
       .eq("is_published", true)
-      .gte("start_at", now)
+      .or(`start_at.gte.${now},end_at.gte.${now}`)
       .order("start_at", { ascending: true });
   }
 
